@@ -7,11 +7,14 @@ import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const failures = [];
+const ignoredDirectories = new Set(['.git', 'node_modules']);
 
+/** Record a validation failure without stopping the remaining checks. */
 function fail(message) {
   failures.push(message);
 }
 
+/** Return whether a path exists. */
 async function exists(file) {
   try {
     await stat(file);
@@ -21,9 +24,11 @@ async function exists(file) {
   }
 }
 
+/** Recursively collect files while skipping repository and dependency internals. */
 async function walk(dir) {
   const output = [];
   for (const entry of await readdir(dir, { withFileTypes: true })) {
+    if (entry.isDirectory() && ignoredDirectories.has(entry.name)) continue;
     const full = path.join(dir, entry.name);
     if (entry.isDirectory()) output.push(...await walk(full));
     else output.push(full);
@@ -31,6 +36,17 @@ async function walk(dir) {
   return output;
 }
 
+/** Parse the scalar types used by this repository's intentionally small frontmatter schema. */
+function parseScalar(value) {
+  const trimmed = value.trim();
+  const quoted = /^(['"])(.*)\1$/.exec(trimmed);
+  const unquoted = quoted ? quoted[2] : trimmed;
+  if (unquoted === 'true') return true;
+  if (unquoted === 'false') return false;
+  return unquoted;
+}
+
+/** Parse the flat YAML frontmatter fields required by SKILL.md files. */
 function frontmatter(markdown) {
   const match = markdown.match(/^---\n([\s\S]*?)\n---/);
   if (!match) return null;
@@ -39,14 +55,15 @@ function frontmatter(markdown) {
     const separator = line.indexOf(':');
     if (separator === -1) continue;
     const key = line.slice(0, separator).trim();
-    const value = line.slice(separator + 1).trim().replace(/^['"]|['"]$/g, '');
-    data[key] = value;
+    const value = line.slice(separator + 1);
+    data[key] = parseScalar(value);
   }
   return data;
 }
 
 const packageJson = JSON.parse(await readFile(path.join(root, 'package.json'), 'utf8'));
 const plugin = JSON.parse(await readFile(path.join(root, '.claude-plugin/plugin.json'), 'utf8'));
+const readme = await readFile(path.join(root, 'README.md'), 'utf8');
 if (packageJson.version !== plugin.version) {
   fail(`version mismatch: package.json=${packageJson.version}, plugin=${plugin.version}`);
 }
@@ -64,7 +81,14 @@ for (const [index, skillFile] of skillFiles.entries()) {
 
   if (!meta?.name || !meta?.description) fail(`${relativeDir}: missing name or description frontmatter`);
   if (meta?.name !== path.basename(dir)) fail(`${relativeDir}: name must match directory`);
-  if (/\bTODO\b/i.test(markdown)) fail(`${relativeDir}: unresolved TODO marker`);
+
+  for (const candidate of await walk(dir)) {
+    if (!/\.(?:md|ya?ml|json|mjs|js)$/i.test(candidate)) continue;
+    const text = await readFile(candidate, 'utf8');
+    if (/\bTODO\b/i.test(text)) {
+      fail(`${relativeDir}: unresolved TODO marker in ${path.relative(dir, candidate)}`);
+    }
+  }
 
   const agentFile = path.join(dir, 'agents/openai.yaml');
   if (!(await exists(agentFile))) {
@@ -74,7 +98,7 @@ for (const [index, skillFile] of skillFiles.entries()) {
 
   const agentYaml = await readFile(agentFile, 'utf8');
   const isWorkflow = relativeDir.startsWith('skills/workflows/');
-  const disablesModel = meta?.['disable-model-invocation'] === 'true';
+  const disablesModel = meta?.['disable-model-invocation'] === true;
   const disablesImplicit = /allow_implicit_invocation:\s*false/.test(agentYaml);
 
   if (isWorkflow) {
@@ -87,6 +111,11 @@ for (const [index, skillFile] of skillFiles.entries()) {
   }
 
   if (!pluginSkills.has(dir)) fail(`${relativeDir}: missing from plugin manifest`);
+
+  const readmeEntry = isWorkflow ? `/${meta?.name}` : `\`${meta?.name}\``;
+  if (meta?.name && !readme.includes(readmeEntry)) {
+    fail(`${relativeDir}: missing from README skill tables`);
+  }
 }
 
 for (const pluginPath of pluginSkills) {

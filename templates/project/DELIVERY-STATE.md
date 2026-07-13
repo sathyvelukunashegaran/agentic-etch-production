@@ -43,4 +43,8 @@
 
 ## Blockers
 
+## Ticket links
+
+## Verification status
+
 ## Session handoff

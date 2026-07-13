@@ -19,8 +19,8 @@ Run the axes in [review-axes.md](references/review-axes.md) independently:
 2. copy and proof;
 3. visual hierarchy and component grammar;
 4. responsive behavior and accessibility;
-5. Etch, ACSS and WordPress integrity;
-6. site-contract fidelity.
+5. stack integrity;
+6. contract fidelity.
 
 For every finding record severity, observed evidence, violated contract or rule, and the smallest credible correction. Keep the axes separate so strength in one cannot hide failure in another.
 

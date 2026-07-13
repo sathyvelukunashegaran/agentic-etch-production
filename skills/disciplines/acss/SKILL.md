@@ -16,9 +16,9 @@ Verify ACSS is active, identify its version or available token source and inspec
 
 ## Styling order
 
-1. Use semantic ACSS tokens and global configuration.
-2. Use verified layout and utility capabilities when they preserve component meaning.
-3. Use component classes for stable component responsibility.
+1. Start with semantic ACSS tokens and global configuration.
+2. Apply verified layout and utility capabilities when they preserve component meaning.
+3. Give stable component responsibilities dedicated component classes.
 4. Add scoped custom properties or CSS only after documenting why ACSS does not cover the requirement.
 5. Keep page-specific exceptions out of global configuration unless they are genuinely systemic.
 6. Render and inspect the result at required widths.

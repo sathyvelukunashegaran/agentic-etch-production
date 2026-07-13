@@ -33,4 +33,4 @@ Approve changes in the relevant project artifact, not only in chat. At minimum, 
 
 ## 5. Treat browser evidence as mandatory
 
-A page is not complete because markup or CSS exists. The changed experience must be rendered and checked at its required widths and interaction states. If browser access is unavailable, the workflow records the result as unverified rather than passed.
+A page remains incomplete when only markup or CSS exists. The changed experience must be rendered and checked at its required widths and interaction states. If browser access is unavailable, the workflow records the result as unverified rather than passed.

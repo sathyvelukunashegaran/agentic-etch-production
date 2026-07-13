@@ -87,6 +87,19 @@ The scaffold creates the project-memory files used by the skills. Existing files
 | `/deliver-etch-site` | The site is understood and needs to be specified and built |
 | `/ship-etch-site` | The complete site is hardened and ready for launch verification |
 
+## Model-invoked disciplines
+
+| Discipline | Use it when |
+|---|---|
+| `website-strategy` | Defining users, page jobs, information architecture or conversion paths |
+| `proof-chain` | Creating or reviewing claims, evidence, testimonials or credibility language |
+| `website-copy` | Writing evidence-backed page copy and calls to action |
+| `web-design` | Defining visual hierarchy, composition, responsive priority or interaction intent |
+| `component-grammar` | Deciding reusable component boundaries, variants and composition rules |
+| `etch` | Implementing with verified Etch capabilities in the current project |
+| `acss` | Applying verified Automatic.css tokens and deciding scoped CSS exceptions |
+| `rendered-review` | Reviewing browser output, interactions and contract fidelity |
+
 Model-invoked disciplines are loaded by the workflows or automatically when the task matches.
 
 ## Project artifacts
@@ -118,7 +131,7 @@ See [Project artifacts](docs/project-artifacts.md) for the ownership rules.
 npm run validate
 ```
 
-Validation checks skill metadata, invocation policy, plugin membership, router coverage, version synchronization, TODO leakage and local Markdown links.
+Validation checks skill metadata, invocation policy, plugin membership, README coverage, router coverage, version synchronization, TODO leakage and local Markdown links.
 
 ## Repository map
 

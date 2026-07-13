@@ -16,6 +16,7 @@ if (args.includes('--help')) {
   process.exit(0);
 }
 
+/** Return whether a path exists. */
 async function exists(file) {
   try {
     await stat(file);
@@ -25,6 +26,7 @@ async function exists(file) {
   }
 }
 
+/** Copy a template tree while preserving existing project files unless forced. */
 async function copyTree(from, to, relative = '') {
   const entries = await readdir(from, { withFileTypes: true });
   for (const entry of entries) {
