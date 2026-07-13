@@ -1,3 +1,4 @@
+# One-shot cleanup; deletes itself after applying the final pre-release architecture.
 name: Remove pre-release compatibility
 
 on:
