@@ -2,6 +2,12 @@
 name: Remove pre-release compatibility
 
 on:
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/remove-pre-release-compat.mjs
+      - .github/workflows/remove-pre-release-compat.yml
   push:
     branches:
       - agent/v0.2-design-production-system
@@ -13,7 +19,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: remove-pre-release-compat
+  group: remove-pre-release-compat-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
