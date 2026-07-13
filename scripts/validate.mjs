@@ -160,7 +160,6 @@ for (const file of markdownFiles) {
 
 for (const script of [
   'scripts/scaffold-project.mjs',
-  'scripts/migrate-project-v02.mjs',
   'scripts/validate-project.mjs',
   'skills/disciplines/rendered-review/scripts/browser-audit.js',
 ]) {
