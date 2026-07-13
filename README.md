@@ -14,6 +14,8 @@ The repository combines:
 
 This is the `0.1.0` foundation release. It is intentionally small enough to test in real projects before splitting into more skills.
 
+**New to the system?** Read the detailed [beginner's guide to using Agentic Etch Production](docs/how-to-use.md). It covers installation, project setup, every workflow, strategy-only usage without Etch automation, project files, a complete worked example, troubleshooting, checklists, and launch.
+
 ## Core model
 
 ```text
