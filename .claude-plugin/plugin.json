@@ -1,0 +1,32 @@
+{
+  "name": "agentic-etch-production",
+  "version": "0.1.0",
+  "description": "Composable workflows and disciplines for producing browser-verified Etch and Automatic.css websites.",
+  "author": {
+    "name": "Sathy Velukunashegaran"
+  },
+  "repository": "https://github.com/sathyvelukunashegaran/agentic-etch-production",
+  "license": "MIT",
+  "keywords": [
+    "etch",
+    "automatic-css",
+    "wordpress",
+    "web-design",
+    "agent-skills"
+  ],
+  "skills": [
+    "./skills/workflows/setup-etch-production",
+    "./skills/workflows/ask-etch-production",
+    "./skills/workflows/grill-website",
+    "./skills/workflows/deliver-etch-site",
+    "./skills/workflows/ship-etch-site",
+    "./skills/disciplines/website-strategy",
+    "./skills/disciplines/proof-chain",
+    "./skills/disciplines/website-copy",
+    "./skills/disciplines/web-design",
+    "./skills/disciplines/component-grammar",
+    "./skills/disciplines/etch",
+    "./skills/disciplines/acss",
+    "./skills/disciplines/rendered-review"
+  ]
+}

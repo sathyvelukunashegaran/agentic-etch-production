@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ask Etch Production"
+  short_description: "Choose the right Etch production workflow"
+policy:
+  allow_implicit_invocation: false

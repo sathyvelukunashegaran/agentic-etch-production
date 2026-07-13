@@ -1,0 +1,3 @@
+interface:
+  display_name: "Component Grammar"
+  short_description: "Design reusable website component boundaries"

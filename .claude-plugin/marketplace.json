@@ -1,0 +1,16 @@
+{
+  "name": "sathyvelukunashegaran",
+  "owner": {
+    "name": "Sathy Velukunashegaran"
+  },
+  "description": "Agent skills for Etch and Automatic.css website production.",
+  "plugins": [
+    {
+      "name": "agentic-etch-production",
+      "source": "./",
+      "description": "Plan, design, build, review and ship browser-verified Etch and Automatic.css websites.",
+      "category": "engineering",
+      "keywords": ["etch", "automatic-css", "wordpress", "web-design"]
+    }
+  ]
+}

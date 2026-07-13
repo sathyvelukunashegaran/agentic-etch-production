@@ -1,0 +1,5 @@
+interface:
+  display_name: "Deliver Etch Site"
+  short_description: "Build an Etch site through a tracer workflow"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,15 @@
+{
+  "name": "agentic-etch-production",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Composable agent skills for producing Etch and Automatic.css websites",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "validate": "node scripts/validate.mjs",
+    "scaffold": "node scripts/scaffold-project.mjs"
+  }
+}

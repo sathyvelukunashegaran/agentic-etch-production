@@ -1,0 +1,3 @@
+interface:
+  display_name: "Automatic CSS"
+  short_description: "Style through the ACSS token boundary"
