@@ -1,0 +1,38 @@
+name: Apply guide review fixes
+
+on:
+  push:
+    branches:
+      - agent/add-beginner-usage-guide
+    paths:
+      - scripts/apply-guide-review-fixes.mjs
+      - .github/workflows/apply-guide-review-fixes.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: apply-guide-review-fixes
+  cancel-in-progress: true
+
+jobs:
+  apply:
+    name: Apply and commit fixes
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4
+        with:
+          ref: agent/add-beginner-usage-guide
+          persist-credentials: true
+      - uses: actions/setup-node@60edb5dd545a775178f52524783378180af0d1f8 # v4
+        with:
+          node-version: 22
+      - run: node scripts/apply-guide-review-fixes.mjs
+      - run: npm run validate
+      - run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add docs/how-to-use.md scripts/apply-guide-review-fixes.mjs .github/workflows/apply-guide-review-fixes.yml
+          git commit -m "address CodeRabbit guide feedback"
+          git push origin HEAD:agent/add-beginner-usage-guide
