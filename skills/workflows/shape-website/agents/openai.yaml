@@ -1,0 +1,5 @@
+interface:
+  display_name: "Shape Website"
+  short_description: "Approve a distinctive visual direction before building"
+policy:
+  allow_implicit_invocation: false

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Implement Website Ticket"
+  short_description: "Build one vertical ticket through rendered truth"
+policy:
+  allow_implicit_invocation: false

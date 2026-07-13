@@ -1,7 +1,7 @@
 {
   "name": "agentic-etch-production",
-  "version": "0.1.0",
-  "description": "Composable workflows and disciplines for producing browser-verified Etch and Automatic.css websites.",
+  "version": "0.2.0",
+  "description": "Tracer-first website production with product contracts, visual direction, Etch, Automatic.css, and rendered verification.",
   "author": {
     "name": "Sathy Velukunashegaran"
   },
@@ -18,6 +18,11 @@
     "./skills/workflows/setup-etch-production",
     "./skills/workflows/ask-etch-production",
     "./skills/workflows/grill-website",
+    "./skills/workflows/specify-website",
+    "./skills/workflows/shape-website",
+    "./skills/workflows/plan-website-delivery",
+    "./skills/workflows/implement-website-ticket",
+    "./skills/workflows/review-website",
     "./skills/workflows/deliver-etch-site",
     "./skills/workflows/ship-etch-site",
     "./skills/disciplines/website-strategy",

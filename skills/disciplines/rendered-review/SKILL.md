@@ -1,29 +1,35 @@
 ---
 name: rendered-review
-description: review a website through rendered browser evidence across strategy, copy and proof, visual hierarchy, component integrity, responsive accessibility, stack correctness and specification fidelity. use after implementation, for regressions, or before launch.
+description: inspect real browser output continuously during implementation or independently after implementation using deterministic DOM checks and separate qualitative review axes for product, conversion, proof, design fidelity, component integrity, responsive accessibility, stack correctness, performance, and specification fidelity.
 ---
 
 # Rendered Review
 
-**Rendered truth** means the browser's observable output outranks markup intention, builder state or the agent's description of what should happen.
+**Rendered truth** means observable browser behavior outranks source intention, builder state, or an agent's description.
 
-## Evidence requirement
+## Modes
 
-Use a real browser, screenshots, DOM inspection, accessibility information, keyboard interaction, console output and network behavior as available. If the environment cannot render the changed experience, report it as unverified and list the exact pending checks. Never infer a pass from source inspection alone.
+- **Continuous:** run after each meaningful vertical slice so defects shape implementation early.
+- **Independent:** run from a fresh context for tracer, regression, release-candidate, or production review.
+
+## Evidence
+
+Use a real browser, screenshots, DOM inspection, accessibility information, keyboard interaction, console output, network behavior, and performance information as available. If the target cannot be rendered, report it as unverified.
+
+Run the deterministic audit in [deterministic-audit.md](references/deterministic-audit.md) before qualitative critique. Detector output is defect evidence only.
 
 ## Review axes
 
-Run the axes in [review-axes.md](references/review-axes.md) independently:
+1. product, user situation, and conversion;
+2. copy, claims, and proof;
+3. approved visual direction and craft;
+4. component grammar and ACSS token boundary;
+5. responsive behavior, states, and accessibility;
+6. Etch, WordPress, console, network, and performance integrity;
+7. site-contract, design-contract, and ticket fidelity.
 
-1. strategy and conversion;
-2. copy and proof;
-3. visual hierarchy and component grammar;
-4. responsive behavior and accessibility;
-5. stack integrity;
-6. contract fidelity.
-
-For every finding record severity, observed evidence, violated contract or rule, and the smallest credible correction. Keep the axes separate so strength in one cannot hide failure in another.
+For each finding record severity, page, viewport, state, evidence, violated contract, correction, disposition, and verification after correction.
 
 ## Completion criterion
 
-A review is complete when every required page, target width and critical interaction has evidence or is explicitly marked unverified, and each finding has a disposition: fixed, accepted, blocked or deferred with an owner.
+Every required page, journey, target width, and state has evidence or is explicitly unverified. No axis may hide another axis's failure.

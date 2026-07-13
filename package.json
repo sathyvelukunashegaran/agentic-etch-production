@@ -1,8 +1,8 @@
 {
   "name": "agentic-etch-production",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
-  "description": "Composable agent skills for producing Etch and Automatic.css websites",
+  "description": "Composable agent workflows for browser-verified Etch and Automatic.css website production",
   "license": "MIT",
   "type": "module",
   "engines": {
@@ -10,6 +10,8 @@
   },
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "scaffold": "node scripts/scaffold-project.mjs"
+    "validate:project": "node scripts/validate-project.mjs",
+    "scaffold": "node scripts/scaffold-project.mjs",
+    "migrate:v0.2": "node scripts/migrate-project-v02.mjs"
   }
 }

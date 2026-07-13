@@ -1,0 +1,5 @@
+interface:
+  display_name: "Specify Website"
+  short_description: "Turn approved product context into page contracts"
+policy:
+  allow_implicit_invocation: false

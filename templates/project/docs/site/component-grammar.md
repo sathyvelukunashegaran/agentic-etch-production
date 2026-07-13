@@ -1,6 +1,6 @@
 # Component grammar
 
-Build this file after the tracer experience has passed rendered review.
+Promote durable component contracts only after rendered use proves them.
 
 ## Principles
 
@@ -8,9 +8,9 @@ Build this file after the tracer experience has passed rendered review.
 
 ## Components
 
-For each component record its responsibility, public interface, content seam, variants, composition rules, responsive behavior and accessibility obligations.
+For each component record responsibility, public interface, content seam, variants, allowed compositions, states, responsive behavior, accessibility obligations, ACSS tokens, custom styling, and examples of correct and incorrect use.
 
-## Composition rules
+## Page compositions
 
 ## Token-boundary exceptions
 

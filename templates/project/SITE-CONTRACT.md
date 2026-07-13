@@ -4,11 +4,7 @@
 **Approved by:**
 **Approved on:**
 
-## Outcome
-
-## Primary users and triggering situations
-
-## Offer and differentiation
+## Website outcome
 
 ## Conversion paths
 
@@ -16,17 +12,21 @@
 
 ## Page contracts
 
-For each page record its user, job, conversion, message hierarchy, proof obligations, content sequence, functional requirements and acceptance criteria.
+For each page or reusable page type record user, triggering situation, page job, entry conditions, conversion, message hierarchy, proof obligations, content sequence, dynamic content, states, responsive and accessibility obligations, SEO and performance obligations, acceptance criteria, and out-of-scope behavior.
 
-## Visual register
+## Content model and dynamic data
 
-## Content model
+## Functional and integration requirements
 
-## Functional requirements
+## Global responsive obligations
 
-## Responsive obligations
+## Global accessibility obligations
 
-## Accessibility obligations
+## SEO and performance obligations
+
+## Relationship to design contract
+
+Visual solutions live in `DESIGN.md`. Record only design obligations and constraints here.
 
 ## Out of scope
 

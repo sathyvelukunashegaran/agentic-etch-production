@@ -1,0 +1,5 @@
+interface:
+  display_name: "Review Website"
+  short_description: "Run independent whole-site rendered review"
+policy:
+  allow_implicit_invocation: false

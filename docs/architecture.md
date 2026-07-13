@@ -1,44 +1,41 @@
-# Architecture
+# Architecture — v0.2
 
-## Three layers
+## Composition
 
-### Operating workflows
+v0.2 separates four concerns:
 
-Human-invoked workflows own consequential transitions: setup, clarification, delivery and launch. They maintain persistent state and explicitly load the disciplines required by each movement.
+1. **Operating workflows** control consequential transitions and remain human-invoked.
+2. **Reusable disciplines** provide focused judgment and may be model-invoked.
+3. **Implementation adapters** isolate Etch, ACSS, and WordPress capability from strategy and design.
+4. **Durable artifacts** preserve approved decisions and execution state across fresh contexts.
 
-### Reusable disciplines
-
-Model-invoked disciplines hold focused judgment. They can be loaded by a workflow or selected automatically when a task matches their trigger description.
-
-### Project memory
-
-Project files carry decisions across sessions. The workflow never relies on a long conversation to remember approved strategy, evidence, page obligations or delivery state.
-
-## Default path
+## Workflow topology
 
 ```text
-setup
-  -> understand
-  -> specify
-  -> prove one tracer experience
-  -> systematize the component grammar
-  -> expand through delivery tickets
-  -> harden against the contract
-  -> ship
+setup -> grill -> specify -> shape -> plan -> implement ticket -> review -> ship
 ```
 
-The default path is opinionated, but research, prototyping and large-project mapping are conditional. A five-page brochure site should not pay the process cost of a complex membership platform.
+The path is a default, not a rigid universal pipeline. Research, prototypes, bug diagnosis, and large-scope wayfinding branch only when uncertainty earns them.
 
-## Invocation boundary
+## Why delivery was decomposed
 
-Workflows are explicit because they can modify durable state, create tickets, build a site or launch it. Disciplines are implicit because they provide reusable judgment inside many contexts.
+The v0.1 `/deliver-etch-site` workflow owned specification, design, planning, implementation, system extraction, expansion, and review. That made the happy path explicit but concentrated too much context and made independent review difficult.
 
-A workflow may say, "load `website-strategy` before interviewing." It must not merely gesture at the discipline with soft language such as "consider strategy where appropriate."
+v0.2 gives each consequential transition one durable output and one approval boundary. `/deliver-etch-site` now routes legacy invocations without chaining workflows.
 
-## Fresh-context boundary
+## Design subsystem
 
-Understanding and specification benefit from one continuous reasoning context. Substantial delivery tickets should start in fresh contexts and read their requirements from project artifacts. This controls context decay and makes parallel work possible.
+`web-design` is one deep discipline with conditional references rather than many small aesthetic skills. It separates product context, page obligations, and the approved visual contract; selects brand, product, or hybrid registers; and supports shape, craft, and critique modes.
 
-## Stack boundary
+Visual shaping uses distinct gates: brief, direction questions, visual evidence, and approval. Browser iteration continues throughout implementation rather than appearing only at final QA.
 
-Website strategy, proof, copy, design, component grammar and rendered review are stack-independent. `etch` and `acss` are adapters. Future adapters can replace them without rewriting the operating system.
+## Feedback loops
+
+- deterministic project-artifact validation;
+- deterministic rendered DOM audit;
+- browser screenshots and DOM inspection;
+- keyboard, console, network, and performance checks;
+- qualitative design critique;
+- independent contract review.
+
+The rate of trustworthy feedback is the system's speed limit.

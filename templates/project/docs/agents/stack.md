@@ -1,9 +1,8 @@
 # Stack and execution capabilities
 
-## WordPress
+Record every capability as verified, unavailable, or unknown and include evidence.
 
-**Status:** unknown
-**Evidence:**
+## WordPress
 
 ## Etch
 
@@ -22,16 +21,22 @@
 ## Browser verification
 
 **Status:** unknown
-**Available browser or screenshot tools:**
+**Browser, screenshot, DOM, accessibility, console, network, and performance tools:**
 **Required target widths:**
+
+## Visual exploration
+
+**Native image generation:** unknown
+**Browser prototype capability:** unknown
+**Asset search or production capability:** unknown
 
 ## Environments
 
 | Environment | URL | Access | Purpose |
 |---|---|---|---|
 
-## Deployment and rollback
+## Deployment, backup, and rollback
 
-## Issue tracker
+## Issue tracker and ticket links
 
 ## Approval authority

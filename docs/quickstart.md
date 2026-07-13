@@ -1,36 +1,41 @@
-# Quickstart
+# v0.2 quickstart
 
-## 1. Install the skills
+## New project
 
-Install through an Agent Skills-compatible harness or the Claude Code plugin instructions in the root README.
-
-## 2. Configure the project
-
-Run `/setup-etch-production` in the WordPress repository. The workflow inspects the repository and records only verified Etch, ACSS, browser and deployment capabilities.
-
-For local scaffolding:
+From a checkout of this repository:
 
 ```bash
-node /path/to/agentic-etch-production/scripts/scaffold-project.mjs .
+node scripts/scaffold-project.mjs /path/to/website-project
 ```
 
-## 3. Choose the entry point
-
-Run `/ask-etch-production` when uncertain.
-
-Typical new project:
+Then run:
 
 ```text
 /setup-etch-production
 /grill-website
-/deliver-etch-site
+/specify-website
+/shape-website
+/plan-website-delivery
+/implement-website-ticket
+/review-website
 /ship-etch-site
 ```
 
-## 4. Keep approvals durable
+Run `/implement-website-ticket` once per substantial approved ticket, preferably in a fresh context.
 
-Approve changes in the relevant project artifact, not only in chat. At minimum, the site contract and tracer acceptance criteria must be approved before implementation scales.
+## Existing v0.1 project
 
-## 5. Treat browser evidence as mandatory
+```bash
+node scripts/migrate-project-v02.mjs /path/to/project
+node scripts/validate-project.mjs /path/to/project --stage=setup
+```
 
-A page remains incomplete when only markup or CSS exists. The changed experience must be rendered and checked at its required widths and interaction states. If browser access is unavailable, the workflow records the result as unverified rather than passed.
+Reconcile and approve `PRODUCT.md`, `SITE-CONTRACT.md`, and `DESIGN.md`, then create the delivery plan. See [Migration to v0.2](migration-v0.2.md).
+
+## Non-negotiable boundaries
+
+- no full implementation before visual direction approval;
+- no invented claims, Etch operations, or ACSS tokens;
+- no system-wide component extraction before rendered tracer evidence;
+- no completion claim without browser evidence;
+- no shipping without independent production verification.

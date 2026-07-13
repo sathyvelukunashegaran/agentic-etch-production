@@ -1,22 +1,23 @@
 ---
 name: setup-etch-production
-description: configure a repository for the agentic etch production workflow by verifying its wordpress, etch, automatic.css, browser, tracker and deployment capabilities and creating the persistent project artifacts. run once before other production workflows.
+description: configure a repository for the v0.2 website production system by verifying wordpress, etch, automatic.css, browser, image-generation, tracker, environment, deployment, and rollback capabilities and creating the durable product, site, design, delivery, evidence, and component artifacts.
 disable-model-invocation: true
 ---
 
 # Setup Etch Production
 
-Configure the current repository without assuming its stack.
+Configure the current project without assuming its stack or control surface.
 
 ## Process
 
-1. **Inspect facts.** Explore the repository, existing agent instructions, WordPress signals, Etch evidence, ACSS evidence, browser tooling, environments, issue tracker and deployment configuration. Look up facts instead of asking the user.
-2. **Classify capabilities.** Record each capability as verified, unavailable or unknown. Never infer Etch or ACSS availability from the user's intention alone.
-3. **Present findings.** Summarize what exists, what is missing and the recommended configuration.
-4. **Resolve decisions one at a time.** Ask only about choices the environment cannot answer: approval authority, tracker, required target widths, deployment destination and similar project policy.
-5. **Create project memory.** Use the files described in [project-files.md](references/project-files.md). Preserve existing user content. Merge into an existing `AGENTS.md` or `CLAUDE.md` instead of replacing it.
-6. **Record the starting state.** Set `DELIVERY-STATE.md` to the correct current movement and list all setup blockers.
+1. Inspect the repository, current site, existing agent instructions, WordPress signals, Etch evidence, ACSS evidence, browser tooling, image-generation capability, environments, issue tracker, deployment, rollback, and existing design system.
+2. Record each capability as `verified`, `unavailable`, or `unknown`, with evidence and version constraints.
+3. Identify whether the primary surface uses a brand, product, or hybrid design register. This is a provisional setup classification, not final visual approval.
+4. Create or migrate the project artifacts listed in [project-files.md](references/project-files.md). Preserve existing user content and merge agent instructions rather than replacing them.
+5. Present findings, missing capabilities, and the recommended next workflow.
+6. Ask only about decisions the environment cannot answer, including approval authority, tracker, target widths, and deployment policy.
+7. Update `DELIVERY-STATE.md` with the current stage and setup blockers.
 
 ## Completion criterion
 
-Setup is complete only when every capability has an evidence-backed status, the project artifacts exist, the approval authority is known and the next workflow can operate without guessing where durable state belongs.
+Every required capability has an evidence-backed status, all v0.2 artifacts exist, approval authority is known, and the next workflow can operate without guessing where product, site, design, or delivery decisions belong.
