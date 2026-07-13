@@ -89,13 +89,18 @@ You normally do not need to invoke every discipline manually. The main workflows
 
 The workflow is most useful when you have the following.
 
-## Required
+## Required for any usage
+
+- An AI agent environment that can load the skills
+- A repository or project folder where durable project files can be stored
+
+The strategy, proof, copy, design, component, and review disciplines can be used without automated access to Etch or Automatic.css.
+
+## Required for full Etch and ACSS implementation
 
 - A WordPress website project or staging site
 - Etch installed or available in the project
 - Automatic.css installed or available in the project
-- An AI agent environment that can load the skills
-- A repository or project folder where durable project files can be stored
 
 ## Strongly recommended
 
@@ -112,13 +117,15 @@ The system does not assume that the agent can control Etch merely because Etch i
 
 The agent must verify what it can actually do in the current environment. For example:
 
-- Can it inspect a page?
-- Can it create or modify elements?
-- Can it edit reusable components?
-- Can it bind WordPress data?
-- Can it preview changes?
-- Can it publish changes?
-- Can it inspect responsive states?
+Verify each capability separately:
+
+- page inspection;
+- element creation and editing;
+- reusable component editing;
+- WordPress data binding;
+- preview behavior;
+- publishing behavior;
+- responsive-state inspection.
 
 Unknown capability must remain marked as **unknown** until evidence is found.
 
@@ -1049,11 +1056,11 @@ Check:
 
 Check:
 
-- Which requirements are missing?
-- Which are partial?
-- Which unapproved features appeared?
-- Which approved decisions were contradicted?
-- Which deviations were consciously accepted?
+- Identify missing requirements.
+- Flag partially implemented requirements.
+- Find features that appeared without approval.
+- Note approved decisions contradicted by the implementation.
+- Record deviations that were consciously accepted.
 
 ## Finding format
 
@@ -1157,8 +1164,17 @@ npx skills@latest add sathyvelukunashegaran/agentic-etch-production
 
 ## Step 2: Scaffold project memory
 
+The scaffold script comes from a local checkout of the Agentic Etch Production repository. Run it from that checkout:
+
 ```bash
+cd /path/to/agentic-etch-production
 node scripts/scaffold-project.mjs ~/Sites/consultancy-site
+```
+
+Alternatively, run the script by its absolute path while remaining in another directory:
+
+```bash
+node /path/to/agentic-etch-production/scripts/scaffold-project.mjs ~/Sites/consultancy-site
 ```
 
 ## Step 3: Open the project in the agent
@@ -1177,7 +1193,7 @@ Start your preferred agent from this directory.
 
 Ask the agent to inspect everything it can before asking questions.
 
-Expected result:
+Example result for a suitably configured project:
 
 - WordPress verified
 - Etch verified for page inspection and editing
@@ -1186,6 +1202,8 @@ Expected result:
 - staging URL recorded
 - deployment recorded as manual
 - rollback recorded as hosting snapshot
+
+Your project may produce different results. Keep any capability as `unknown` or `unavailable` when setup cannot verify it; do not copy the example statuses into the project.
 
 ## Step 5: Clarify the site
 
@@ -1609,7 +1627,7 @@ Cause:
 
 Fix:
 
-Use one concise site contract, one tracer, and a small number of tickets. Research and prototypes are conditional, not mandatory.
+Use one concise site contract, one tracer, and a few tickets. Research and prototypes are conditional, not mandatory.
 
 ## Problem: The workflow feels too light for a large site
 
@@ -1869,11 +1887,14 @@ Run the workflow on one controlled real project and complete one tracer experien
 
 # Minimal quick-start summary
 
-For a new project, the shortest recommended path is:
+For a new project, the shortest recommended path starts from a local checkout of Agentic Etch Production:
 
 ```bash
+cd /path/to/agentic-etch-production
 node scripts/scaffold-project.mjs /path/to/website-project
 ```
+
+You may also call `scripts/scaffold-project.mjs` by its absolute path from another directory.
 
 Then, inside the agent:
 
