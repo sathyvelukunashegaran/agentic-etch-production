@@ -12,4 +12,4 @@ Create or preserve:
 - `docs/site/component-grammar.md` — proven component contracts;
 - `docs/site/delivery-plan.md` — tracer, tickets, dependencies, and current frontier.
 
-Use `scripts/scaffold-project.mjs` for a new project and `scripts/migrate-project-v02.mjs` for a v0.1 project when a repository checkout is available. Never overwrite approved content without explicit instruction.
+Use `scripts/scaffold-project.mjs` when a repository checkout is available. When artifacts already exist, preserve them and reconcile ownership instead of overwriting approved content.

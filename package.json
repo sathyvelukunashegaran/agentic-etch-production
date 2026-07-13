@@ -11,7 +11,6 @@
   "scripts": {
     "validate": "node scripts/validate.mjs",
     "validate:project": "node scripts/validate-project.mjs",
-    "scaffold": "node scripts/scaffold-project.mjs",
-    "migrate:v0.2": "node scripts/migrate-project-v02.mjs"
+    "scaffold": "node scripts/scaffold-project.mjs"
   }
 }

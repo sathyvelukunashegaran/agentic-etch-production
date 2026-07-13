@@ -23,15 +23,6 @@ Then run:
 
 Run `/implement-website-ticket` once per substantial approved ticket, preferably in a fresh context.
 
-## Existing v0.1 project
-
-```bash
-node scripts/migrate-project-v02.mjs /path/to/project
-node scripts/validate-project.mjs /path/to/project --stage=setup
-```
-
-Reconcile and approve `PRODUCT.md`, `SITE-CONTRACT.md`, and `DESIGN.md`, then create the delivery plan. See [Migration to v0.2](migration-v0.2.md).
-
 ## Non-negotiable boundaries
 
 - no full implementation before visual direction approval;

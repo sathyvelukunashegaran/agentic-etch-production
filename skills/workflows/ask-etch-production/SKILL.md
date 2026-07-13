@@ -18,7 +18,6 @@ Recommend the next workflow. Do not run another human-invoked workflow on the us
 - An approved ticket is on the current frontier: `/implement-website-ticket`.
 - A tracer, release candidate, or suspicious regression needs independent verification: `/review-website`.
 - Whole-site review passed and launch safety is ready: `/ship-etch-site`.
-- A user invokes the v0.1 `/deliver-etch-site` command: use that compatibility router to identify one of the v0.2 workflows above.
 
 ## Conditional branches
 

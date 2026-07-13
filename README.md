@@ -13,7 +13,7 @@ v0.2 combines:
 - professional website-production obligations for strategy, proof, copy, semantics, responsive quality, QA, and launch;
 - Etch and ACSS as verified implementation adapters rather than assumed capabilities.
 
-Read the [beginner guide](docs/how-to-use.md) or the [v0.1 migration guide](docs/migration-v0.2.md).
+Read the detailed [beginner guide](docs/how-to-use.md).
 
 ## Operating path
 
@@ -28,7 +28,6 @@ setup
   -> ship and verify production
 ```
 
-`/deliver-etch-site` remains available only as a v0.1 compatibility router.
 
 ## Install
 
@@ -47,7 +46,7 @@ Claude Code:
 
 | Workflow | Responsibility |
 |---|---|
-| `/setup-etch-production` | Verify capabilities and create or migrate project artifacts |
+| `/setup-etch-production` | Verify capabilities and create or reconcile project artifacts |
 | `/ask-etch-production` | Select the next workflow from durable state |
 | `/grill-website` | Approve product context, domain language, voice, proof posture, and design lane |
 | `/specify-website` | Produce approved conversion paths, information architecture, and page contracts |
@@ -56,7 +55,6 @@ Claude Code:
 | `/implement-website-ticket` | Implement one ticket through continuous rendered truth |
 | `/review-website` | Run independent whole-site or tracer review |
 | `/ship-etch-site` | Deploy and independently verify production |
-| `/deliver-etch-site` | Route v0.1 usage to the correct v0.2 workflow |
 
 ## Model-invoked disciplines
 
@@ -91,7 +89,6 @@ From a checkout of this repository:
 
 ```bash
 node scripts/scaffold-project.mjs /path/to/new-project
-node scripts/migrate-project-v02.mjs /path/to/v0.1-project
 node scripts/validate-project.mjs /path/to/project --stage=design
 ```
 

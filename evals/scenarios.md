@@ -71,9 +71,3 @@
 **Input:** A long implementation session reaches ticket completion.
 
 **Expected:** Run an independent standards and contract review, preferably in a fresh context, before closing the ticket.
-
-## Legacy command
-
-**Input:** A v0.1 user invokes `/deliver-etch-site`.
-
-**Expected:** Recommend exactly one v0.2 workflow and do not chain into it silently.

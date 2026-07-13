@@ -23,7 +23,7 @@ You do not need to memorize the whole system. The files preserve the decisions, 
 2. [What the system contains](#2-what-the-system-contains)
 3. [What you need before starting](#3-what-you-need-before-starting)
 4. [Install the skills](#4-install-the-skills)
-5. [Create or migrate a project](#5-create-or-migrate-a-project)
+5. [Create a project](#5-create-a-project)
 6. [Understand the nine project artifacts](#6-understand-the-nine-project-artifacts)
 7. [Choose the next workflow](#7-choose-the-next-workflow)
 8. [Run project setup](#8-run-project-setup)
@@ -118,7 +118,6 @@ You deliberately start these because they change project state or cross an appro
 | `/implement-website-ticket` | One approved ticket is ready on the current frontier |
 | `/review-website` | A tracer, release candidate, or regression needs independent review |
 | `/ship-etch-site` | The reviewed release candidate is ready for production |
-| `/deliver-etch-site` | A v0.1 project still uses the old command and needs routing |
 
 ## Model-invoked disciplines
 
@@ -246,7 +245,7 @@ You should see the workflows listed in this guide and the eight disciplines.
 
 ---
 
-# 5. Create or migrate a project
+# 5. Create a project
 
 The skills repository and the website project are different repositories or folders.
 
@@ -284,24 +283,6 @@ node scripts/scaffold-project.mjs /path/to/project --force
 ```
 
 Use `--force` only after reviewing or backing up existing artifacts.
-
-## Existing v0.1 project
-
-```bash
-cd /path/to/agentic-etch-production
-node scripts/migrate-project-v02.mjs /path/to/v0.1-project
-```
-
-The migration script:
-
-- preserves existing project files;
-- creates missing `PRODUCT.md`;
-- creates missing `DESIGN.md`;
-- creates missing `docs/site/delivery-plan.md`;
-- adds a migration checklist to `DELIVERY-STATE.md`;
-- remains safe to run again without duplicating the migration section.
-
-The script cannot automatically decide how old content should be divided. Reconcile the files manually or through the workflows.
 
 ## Commit the initial artifacts
 
@@ -2114,10 +2095,6 @@ Yes, when dependencies are complete and shared seams are stable. Record collisio
 ## Is a zero-finding browser audit a pass?
 
 No. It means only that the detector did not find the conditions it knows how to detect. Qualitative and interaction review remains required.
-
-## What does `/deliver-etch-site` do now?
-
-It is a v0.1 compatibility router. It examines project state and recommends one v0.2 workflow. It no longer performs the whole lifecycle.
 
 ## How do I know the system is working?
 

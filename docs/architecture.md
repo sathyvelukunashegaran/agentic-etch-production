@@ -17,11 +17,9 @@ setup -> grill -> specify -> shape -> plan -> implement ticket -> review -> ship
 
 The path is a default, not a rigid universal pipeline. Research, prototypes, bug diagnosis, and large-scope wayfinding branch only when uncertainty earns them.
 
-## Why delivery was decomposed
+## Workflow boundaries
 
-The v0.1 `/deliver-etch-site` workflow owned specification, design, planning, implementation, system extraction, expansion, and review. That made the happy path explicit but concentrated too much context and made independent review difficult.
-
-v0.2 gives each consequential transition one durable output and one approval boundary. `/deliver-etch-site` now routes legacy invocations without chaining workflows.
+Each consequential transition owns one durable output and one approval boundary. This keeps contexts small, makes independent review possible, and prevents strategy, visual direction, planning, implementation, and shipping from collapsing into one overloaded command.
 
 ## Design subsystem
 
