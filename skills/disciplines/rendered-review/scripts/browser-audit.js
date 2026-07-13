@@ -16,10 +16,52 @@
     return parts.join(' > ');
   }
 
+  function labelledByText(element) {
+    const ids = (element.getAttribute('aria-labelledby') || '')
+      .split(/\s+/)
+      .filter(Boolean);
+    return ids
+      .map((id) => document.getElementById(id)?.textContent || '')
+      .join(' ')
+      .trim();
+  }
+
+  function nativeLabelText(element) {
+    if (!('labels' in element) || !element.labels) return '';
+    return [...element.labels]
+      .map((label) => label.textContent || '')
+      .join(' ')
+      .trim();
+  }
+
   function accessibleName(element) {
-    return (element.getAttribute('aria-label') ||
-      element.getAttribute('title') ||
-      element.textContent || '').trim();
+    const explicit = element.getAttribute('aria-label')?.trim();
+    if (explicit) return explicit;
+
+    const labelledBy = labelledByText(element);
+    if (labelledBy) return labelledBy;
+
+    const nativeLabel = nativeLabelText(element);
+    if (nativeLabel) return nativeLabel;
+
+    const title = element.getAttribute('title')?.trim();
+    if (title) return title;
+
+    if (element.tagName === 'INPUT' && ['button', 'submit', 'reset'].includes(element.type)) {
+      const value = element.value?.trim();
+      if (value) return value;
+    }
+
+    const text = element.textContent?.trim();
+    if (text) return text;
+
+    const imageAlt = [...element.querySelectorAll('img[alt]')]
+      .map((image) => image.alt)
+      .join(' ')
+      .trim();
+    if (imageAlt) return imageAlt;
+
+    return element.querySelector('svg title')?.textContent?.trim() || '';
   }
 
   function isVisible(element) {
@@ -70,46 +112,73 @@
       ...data,
     });
 
-    if (!document.documentElement.lang.trim()) add('high', 'document-language', document.documentElement, 'The document has no language declaration.');
-    if (!document.title.trim()) add('high', 'document-title', document.head, 'The document title is empty.');
+    if (!document.documentElement.lang.trim()) {
+      add('high', 'document-language', document.documentElement, 'The document has no language declaration.');
+    }
+    if (!document.title.trim()) {
+      add('high', 'document-title', document.head, 'The document title is empty.');
+    }
 
     const mains = [...document.querySelectorAll('main')];
-    if (mains.length !== 1) add('high', 'main-landmark', document.body, `Expected exactly one main landmark; found ${mains.length}.`);
+    if (mains.length !== 1) {
+      add('high', 'main-landmark', document.body, `Expected exactly one main landmark; found ${mains.length}.`);
+    }
 
     const ids = new Map();
     for (const element of document.querySelectorAll('[id]')) {
       const id = element.id;
       if (!id) continue;
-      if (ids.has(id)) add('high', 'duplicate-id', element, `Duplicate id "${id}".`, { duplicateOf: selectorFor(ids.get(id)) });
-      else ids.set(id, element);
+      if (ids.has(id)) {
+        add('high', 'duplicate-id', element, `Duplicate id "${id}".`, { duplicateOf: selectorFor(ids.get(id)) });
+      } else {
+        ids.set(id, element);
+      }
     }
 
     let previousLevel = 0;
     for (const heading of document.querySelectorAll('h1,h2,h3,h4,h5,h6')) {
       const level = Number(heading.tagName[1]);
-      if (previousLevel && level > previousLevel + 1) add('medium', 'heading-jump', heading, `Heading level jumps from h${previousLevel} to h${level}.`);
+      if (previousLevel && level > previousLevel + 1) {
+        add('medium', 'heading-jump', heading, `Heading level jumps from h${previousLevel} to h${level}.`);
+      }
       previousLevel = level;
     }
 
     for (const image of document.querySelectorAll('img')) {
-      if (!image.hasAttribute('alt')) add('high', 'image-alt', image, 'Image is missing an alt attribute.');
+      if (!image.hasAttribute('alt')) {
+        add('high', 'image-alt', image, 'Image is missing an alt attribute.');
+      }
     }
 
     for (const control of document.querySelectorAll('input:not([type="hidden"]),select,textarea')) {
-      const labelledBy = control.getAttribute('aria-labelledby');
-      const label = control.id ? document.querySelector(`label[for="${CSS.escape(control.id)}"]`) : control.closest('label');
-      if (!control.getAttribute('aria-label') && !labelledBy && !label) add('high', 'form-label', control, 'Form control has no associated label or accessible name.');
+      if (!accessibleName(control)) {
+        add('high', 'form-label', control, 'Form control has no associated label or accessible name.');
+      }
     }
 
-    for (const action of document.querySelectorAll('button,a[href],[role="button"]')) {
-      if (isVisible(action) && !accessibleName(action)) add('high', 'action-name', action, 'Interactive element has no accessible name.');
+    const actionSelector = [
+      'button',
+      'a[href]',
+      '[role="button"]',
+      'input[type="button"]',
+      'input[type="submit"]',
+      'input[type="reset"]',
+    ].join(',');
+    for (const action of document.querySelectorAll(actionSelector)) {
+      if (isVisible(action) && !accessibleName(action)) {
+        add('high', 'action-name', action, 'Interactive element has no accessible name.');
+      }
       const rect = action.getBoundingClientRect();
-      if (isVisible(action) && (rect.width < 24 || rect.height < 24)) add('low', 'target-size', action, `Interactive target is ${Math.round(rect.width)}x${Math.round(rect.height)}px.`);
+      if (isVisible(action) && (rect.width < 24 || rect.height < 24)) {
+        add('low', 'target-size', action, `Interactive target is ${Math.round(rect.width)}x${Math.round(rect.height)}px.`);
+      }
     }
 
     for (const link of document.querySelectorAll('a[href]')) {
       const href = link.getAttribute('href');
-      if (!href || href === '#') add('medium', 'empty-link', link, 'Link has an empty or placeholder destination.');
+      if (!href || href === '#') {
+        add('medium', 'empty-link', link, 'Link has an empty or placeholder destination.');
+      }
     }
 
     const overflow = document.documentElement.scrollWidth - global.innerWidth;
@@ -117,7 +186,11 @@
       add('high', 'horizontal-overflow', document.documentElement, `Document is ${Math.round(overflow)}px wider than the viewport.`);
       for (const element of document.body.querySelectorAll('*')) {
         const rect = element.getBoundingClientRect();
-        if (rect.right > global.innerWidth + 1 || rect.left < -1) add('medium', 'overflow-element', element, 'Element extends beyond the viewport.', { rect: { left: rect.left, right: rect.right, width: rect.width } });
+        if (rect.right > global.innerWidth + 1 || rect.left < -1) {
+          add('medium', 'overflow-element', element, 'Element extends beyond the viewport.', {
+            rect: { left: rect.left, right: rect.right, width: rect.width },
+          });
+        }
       }
     }
 
@@ -133,7 +206,9 @@
       const weight = Number.parseInt(style.fontWeight, 10) || 400;
       const large = size >= 24 || (size >= 18.66 && weight >= 700);
       const required = large ? 3 : 4.5;
-      if (ratio + 0.01 < required) add('high', 'text-contrast', element, `Estimated contrast ${ratio.toFixed(2)}:1 is below ${required}:1.`, { ratio, required });
+      if (ratio + 0.01 < required) {
+        add('high', 'text-contrast', element, `Estimated contrast ${ratio.toFixed(2)}:1 is below ${required}:1.`, { ratio, required });
+      }
     }
 
     const counts = findings.reduce((acc, finding) => {
