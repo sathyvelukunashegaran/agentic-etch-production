@@ -1,0 +1,3 @@
+interface:
+  display_name: "Rendered Review"
+  short_description: "Review the website through browser evidence"

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Ship Etch Site"
+  short_description: "Verify and launch an Etch website"
+policy:
+  allow_implicit_invocation: false

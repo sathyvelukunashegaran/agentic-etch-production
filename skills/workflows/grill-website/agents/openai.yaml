@@ -1,0 +1,5 @@
+interface:
+  display_name: "Grill Website"
+  short_description: "Clarify and contract a website"
+policy:
+  allow_implicit_invocation: false
