@@ -1,24 +1,38 @@
 ---
 name: web-design
-description: define or review visual hierarchy, layout, typography, color, imagery, responsive priority and interaction intent for a website. use when wireframes, visual direction, page composition or responsive design decisions are needed.
+description: shape, craft, critique, and refine distinctive production website interfaces from approved product and page contracts. use for visual direction, brand or product register selection, hierarchy, typography, color strategy, layout, imagery, motion, responsive composition, interaction states, anti-pattern detection, browser iteration, and DESIGN.md maintenance.
 ---
 
 # Web Design
 
-Design expresses the page contract through a coherent **visual register**: the level of formality, energy, density, contrast and motion appropriate to the audience and offer.
+Treat `PRODUCT.md` as product context, `SITE-CONTRACT.md` as task obligations, and `DESIGN.md` as the approved visual contract.
 
-## Discipline
+## Setup
 
-1. Establish content hierarchy before decoration.
-2. Use composition to clarify sequence, comparison, proof and action.
-3. Choose typography, color, imagery and motion as one register rather than isolated preferences.
-4. Design responsive priority, not only smaller dimensions. Preserve meaning, proof adjacency and conversion access at narrow widths.
-5. Use cards for genuinely independent units, not as a default wrapper.
-6. When two plausible directions cannot be resolved in prose, create a cheap prototype with materially different alternatives.
-7. Define intended behavior and constraints; let `etch`, `acss` and `component-grammar` decide implementation mechanics.
+1. Read the relevant artifacts and inspect at least one existing page, component, token, theme, or design-system file.
+2. Select the appropriate register using [context-and-registers.md](references/context-and-registers.md).
+3. Load only the reference needed for the current mode:
+   - direction and approval: [shape.md](references/shape.md);
+   - production implementation: [craft.md](references/craft.md);
+   - qualitative review: [critique.md](references/critique.md);
+   - typography, color, layout, and motion constraints: [visual-rules.md](references/visual-rules.md);
+   - responsive behavior and states: [states-and-responsive.md](references/states-and-responsive.md);
+   - saturated AI defaults and weak patterns: [anti-patterns.md](references/anti-patterns.md).
 
-Read [design-system.md](references/design-system.md) for the design contract.
+## Core rule
+
+Produce a concrete, defensible visual decision rather than an average of familiar website patterns. Preserve an approved direction's composition, hierarchy, atmosphere, signature motifs, and distinctive moves unless a documented constraint requires an approved deviation.
+
+## Rendered loop
+
+During craft, use the browser continuously:
+
+```text
+build -> render -> inspect -> critique -> correct -> render again
+```
+
+A screenshot that was not inspected does not count. Deterministic audit output is defect evidence, not proof of completion.
 
 ## Completion criterion
 
-A fresh implementer can explain the hierarchy, visual register, responsive priority and interaction intent without inventing missing aesthetic decisions.
+The result is coherent with the product, page job, approved direction, responsive priorities, state obligations, accessibility, and project system. Generic visual completion is not sufficient.

@@ -1,0 +1,5 @@
+interface:
+  display_name: "Plan Website Delivery"
+  short_description: "Create tracer-bullet tickets and dependencies"
+policy:
+  allow_implicit_invocation: false

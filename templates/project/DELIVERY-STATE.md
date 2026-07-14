@@ -1,42 +1,46 @@
 # Delivery state
 
-**Current movement:** setup
+**System version:** 0.2.0
+**Current stage:** setup
+**Current ticket:**
 **Last updated:**
 
-## Understand
+## Product
 
-- [ ] Domain vocabulary established
-- [ ] Audience and triggering situations approved
-- [ ] Offer and conversion approved
+- [ ] Domain language established
+- [ ] PRODUCT.md approved
 - [ ] Proof gaps recorded
 
-## Specify
+## Specification
 
-- [ ] Site contract approved
-- [ ] Tracer experience selected
-- [ ] Tracer acceptance criteria approved
+- [ ] SITE-CONTRACT.md approved
+- [ ] Page contracts observable
 
-## Prove
+## Design
 
-- [ ] Required disciplines loaded
-- [ ] Tracer implemented
-- [ ] Rendered review passed
+- [ ] Shape brief confirmed
+- [ ] Direction questions resolved
+- [ ] Visual evidence reviewed
+- [ ] DESIGN.md approved
 
-## Systematize
+## Planning
 
-- [ ] Component grammar extracted from rendered evidence
-- [ ] Variants and content seams documented
-
-## Expand
-
-- [ ] Delivery tickets created
+- [ ] Tracer approved
+- [ ] Vertical tickets created
 - [ ] Blocking edges recorded
 - [ ] Current frontier recorded
 
-## Harden
+## Implementation
 
-- [ ] Whole-site review completed
-- [ ] Contract deviations resolved or accepted
+- [ ] Current ticket criteria recorded
+- [ ] Continuous rendered loop used
+- [ ] Deterministic audit run
+- [ ] Independent ticket review passed
+
+## Whole-site review
+
+- [ ] Required scope verified
+- [ ] Deviations resolved or accepted
 - [ ] Launch blockers cleared
 
 ## Current frontier
@@ -46,5 +50,7 @@
 ## Ticket links
 
 ## Verification status
+
+## Accepted deviations
 
 ## Session handoff

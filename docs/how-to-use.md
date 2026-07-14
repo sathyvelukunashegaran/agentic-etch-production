@@ -1,597 +1,586 @@
-# How to Use Agentic Etch Production
+# How to Use Agentic Etch Production v0.2
 
-This guide explains how to use Agentic Etch Production from the beginning, even if you have never used agent skills, workflow files, Etch automation, or a structured website-production system before.
+This is the beginner operating manual for Agentic Etch Production.
 
-The system is designed to help an AI coding agent plan, design, build, review, and eventually ship WordPress websites made with **Etch** and **Automatic.css**.
+The system helps an AI agent plan, shape, build, review, and ship WordPress websites made with **Etch** and **Automatic.css**. It is designed to prevent several common agent failures:
 
-It does not replace your judgment. It gives the agent a reliable operating method so it is less likely to:
+- building before the business and user are understood;
+- confusing an approved strategy with an approved visual direction;
+- inventing claims, Etch operations, or ACSS tokens;
+- producing generic AI-looking design;
+- creating a speculative component library before real pages exist;
+- losing decisions when a long conversation ends;
+- declaring work complete without checking the rendered website;
+- shipping without backup, rollback, and live verification.
 
-- start building before the website is understood;
-- invent claims, Etch operations, or ACSS tokens;
-- forget decisions made earlier;
-- create a large speculative component library;
-- declare a page complete without seeing it in a browser;
-- lose context when work continues in a new session.
+You do not need to memorize the whole system. The files preserve the decisions, and `/ask-etch-production` can recommend the next workflow.
 
 ---
 
 ## Table of contents
 
-1. [What this repository is](#1-what-this-repository-is)
-2. [What you need before starting](#2-what-you-need-before-starting)
-3. [How the system works](#3-how-the-system-works)
+1. [The complete workflow](#1-the-complete-workflow)
+2. [What the system contains](#2-what-the-system-contains)
+3. [What you need before starting](#3-what-you-need-before-starting)
 4. [Install the skills](#4-install-the-skills)
-5. [Prepare your website project](#5-prepare-your-website-project)
-6. [Understand the project files](#6-understand-the-project-files)
-7. [Choose the correct workflow](#7-choose-the-correct-workflow)
-8. [Run setup](#8-run-setup)
-9. [Clarify the website](#9-clarify-the-website)
-10. [Approve the site contract](#10-approve-the-site-contract)
-11. [Deliver the first tracer experience](#11-deliver-the-first-tracer-experience)
-12. [Turn the tracer into a reusable system](#12-turn-the-tracer-into-a-reusable-system)
-13. [Build the remaining website](#13-build-the-remaining-website)
-14. [Review the rendered website](#14-review-the-rendered-website)
+5. [Create a project](#5-create-a-project)
+6. [Understand the nine project artifacts](#6-understand-the-nine-project-artifacts)
+7. [Choose the next workflow](#7-choose-the-next-workflow)
+8. [Run project setup](#8-run-project-setup)
+9. [Grill the product](#9-grill-the-product)
+10. [Specify the website](#10-specify-the-website)
+11. [Shape the visual direction](#11-shape-the-visual-direction)
+12. [Plan the tracer and delivery tickets](#12-plan-the-tracer-and-delivery-tickets)
+13. [Implement one ticket](#13-implement-one-ticket)
+14. [Review independently](#14-review-independently)
 15. [Ship the website](#15-ship-the-website)
-16. [Complete beginner walkthrough](#16-complete-beginner-walkthrough)
-17. [How to resume work in a new session](#17-how-to-resume-work-in-a-new-session)
-18. [How to work with tickets and multiple agents](#18-how-to-work-with-tickets-and-multiple-agents)
-19. [How the individual disciplines work](#19-how-the-individual-disciplines-work)
-20. [Common problems and fixes](#20-common-problems-and-fixes)
-21. [Recommended first pilot project](#21-recommended-first-pilot-project)
-22. [Project checklists](#22-project-checklists)
+16. [Complete worked example](#16-complete-worked-example)
+17. [Resume in a fresh session](#17-resume-in-a-fresh-session)
+18. [Use multiple agents safely](#18-use-multiple-agents-safely)
+19. [Use the specialist disciplines](#19-use-the-specialist-disciplines)
+20. [Validate project readiness](#20-validate-project-readiness)
+21. [Common problems and corrections](#21-common-problems-and-corrections)
+22. [Operational checklists](#22-operational-checklists)
 23. [Glossary](#23-glossary)
 24. [Frequently asked questions](#24-frequently-asked-questions)
 
 ---
 
-# 1. What this repository is
+# 1. The complete workflow
 
-Agentic Etch Production is a collection of reusable instructions called **skills**.
+For a new website, the default path is:
 
-A skill teaches an AI agent how to perform a particular task or follow a particular standard. Instead of explaining your preferred process again in every conversation, you install the skills once and invoke them when needed.
+```text
+/setup-etch-production
+        ↓
+/grill-website
+        ↓
+/specify-website
+        ↓
+/shape-website
+        ↓
+/plan-website-delivery
+        ↓
+/implement-website-ticket
+        ↓
+/review-website
+        ↓
+/ship-etch-site
+```
 
-This repository contains two kinds of skills.
+Run `/implement-website-ticket` once for every substantial delivery ticket. A real website may therefore use it many times.
+
+The stages mean:
+
+| Stage | Main question | Durable output |
+|---|---|---|
+| Setup | What can this project and agent actually do? | `docs/agents/stack.md` and all project artifacts |
+| Grill | Who is this for, what is offered, and what is true? | `CONTEXT.md`, `PRODUCT.md`, evidence register |
+| Specify | What must the website and each page accomplish? | `SITE-CONTRACT.md` |
+| Shape | What approved visual direction should implementation reproduce? | `DESIGN.md` |
+| Plan | What is the tracer, ticket graph, and current frontier? | `docs/site/delivery-plan.md` |
+| Implement | Does one vertical ticket work in the browser? | Working site, component updates, evidence, handoff |
+| Review | Does the complete result satisfy every contract independently? | Findings and verified delivery state |
+| Ship | Does the live production environment work safely? | Production evidence and release record |
+
+The order is intentional:
+
+```text
+product truth
+→ website obligations
+→ visual direction
+→ delivery topology
+→ implementation
+→ independent verification
+→ production verification
+```
+
+Research, prototypes, diagnosis, and large-project mapping are conditional branches. You do not need to perform every possible activity on every website.
+
+---
+
+# 2. What the system contains
+
+Agentic Etch Production contains two classes of skills.
 
 ## Human-invoked workflows
 
-These are the major commands that you deliberately start:
+You deliberately start these because they change project state or cross an approval boundary.
 
-| Workflow | Purpose |
+| Workflow | Use it when |
 |---|---|
-| `/setup-etch-production` | Inspect and configure a project before production begins |
-| `/ask-etch-production` | Recommend the correct workflow when you are unsure what to do next |
-| `/grill-website` | Clarify the business, audience, offer, pages, conversion path, and evidence |
-| `/deliver-etch-site` | Specify, build, systematize, expand, and harden the website |
-| `/ship-etch-site` | Verify and launch a completed website safely |
-
-These workflows are human-invoked because they can make consequential changes to project state.
+| `/setup-etch-production` | The project has not been configured, or capabilities are stale |
+| `/ask-etch-production` | You are unsure what should happen next |
+| `/grill-website` | Audience, offer, voice, conversion, proof, or design lane is unclear |
+| `/specify-website` | Product context is approved but page contracts are missing |
+| `/shape-website` | Site requirements are approved but visual direction is not |
+| `/plan-website-delivery` | Product, site, and design contracts are approved but work is not ticketed |
+| `/implement-website-ticket` | One approved ticket is ready on the current frontier |
+| `/review-website` | A tracer, release candidate, or regression needs independent review |
+| `/ship-etch-site` | The reviewed release candidate is ready for production |
 
 ## Model-invoked disciplines
 
-These are specialist capabilities that a workflow or the agent loads when required:
+These hold reusable specialist judgment. A workflow loads them when needed.
 
 | Discipline | Responsibility |
 |---|---|
-| `website-strategy` | Users, page jobs, information architecture, and conversions |
+| `website-strategy` | Users, triggering situations, page jobs, information architecture, conversion paths |
 | `proof-chain` | Claims, evidence, source quality, and permissible wording |
-| `website-copy` | Evidence-backed copy and calls to action |
-| `web-design` | Hierarchy, visual direction, responsive priority, and interaction intent |
-| `component-grammar` | Reusable components, variants, content seams, and composition rules |
-| `etch` | Verified Etch implementation operations |
-| `acss` | Verified Automatic.css tokens and scoped CSS decisions |
-| `rendered-review` | Browser-based review and specification fidelity |
+| `website-copy` | Evidence-backed production copy and calls to action |
+| `web-design` | Registers, visual shaping, craft, critique, responsive states, and visual rules |
+| `component-grammar` | Reusable component responsibilities, variants, seams, and composition |
+| `etch` | Verified Etch operations in the current project |
+| `acss` | Verified Automatic.css tokens and custom-CSS boundary |
+| `rendered-review` | Continuous and independent browser verification |
 
-You normally do not need to invoke every discipline manually. The main workflows explicitly load them at the right time.
+You normally invoke the workflows. The workflows orchestrate the disciplines.
 
 ---
 
-# 2. What you need before starting
+# 3. What you need before starting
 
-The workflow is most useful when you have the following.
+## Required for any use
 
-## Required for any usage
+- An AI agent environment that can load Agent Skills
+- A repository or project folder where durable Markdown files can be stored
 
-- An AI agent environment that can load the skills
-- A repository or project folder where durable project files can be stored
-
-The strategy, proof, copy, design, component, and review disciplines can be used without automated access to Etch or Automatic.css.
+You can use the strategy, proof, copy, design, component, and review disciplines without automated Etch access.
 
 ## Required for full Etch and ACSS implementation
 
-- A WordPress website project or staging site
-- Etch installed or available in the project
-- Automatic.css installed or available in the project
+- A WordPress project or staging site
+- Etch installed or otherwise available
+- Automatic.css installed or otherwise available
+- A verified method for the agent to interact with the relevant project surface
+
+Installation alone does not prove automation capability.
+
+The agent must verify individual operations, such as:
+
+- opening or inspecting a page;
+- creating and editing elements;
+- applying classes;
+- creating or editing reusable components;
+- binding WordPress data;
+- handling forms and states;
+- previewing responsive behavior;
+- publishing or saving changes.
 
 ## Strongly recommended
 
-- A staging environment rather than direct production access
-- Browser automation or at least screenshot capability
-- Access to inspect the rendered DOM, console, and network behavior
-- A source of business information such as a brief, existing site, customer notes, or founder interview
-- Real proof such as testimonials, metrics, certifications, case studies, or screenshots
-- A Git repository so changes can be reviewed and reverted
+- A staging site rather than production-only access
+- Git or another revision history
+- Browser automation or screenshot capability
+- DOM and accessibility-tree inspection
+- Console and failed-network-request visibility
+- A documented deployment process
+- A backup and rollback mechanism
+- Real business material, customer language, and proof
+- One named human with approval authority
 
-## Important limitation
+## Good first pilot
 
-The system does not assume that the agent can control Etch merely because Etch is installed.
+Start with a real but controlled project containing:
 
-The agent must verify what it can actually do in the current environment. For example:
+- one primary audience;
+- one primary conversion;
+- a homepage or focused landing page;
+- real copy and proof;
+- a header and footer;
+- one form or meaningful interaction;
+- at least one reusable component;
+- responsive obligations;
+- one dynamic WordPress element when practical.
 
-Verify each capability separately:
-
-- page inspection;
-- element creation and editing;
-- reusable component editing;
-- WordPress data binding;
-- preview behavior;
-- publishing behavior;
-- responsive-state inspection.
-
-Unknown capability must remain marked as **unknown** until evidence is found.
-
-The same rule applies to Automatic.css. The agent must never invent a token or variable name.
-
----
-
-# 3. How the system works
-
-The default path has six production movements.
-
-```text
-Understand
-  -> Specify
-  -> Prove
-  -> Systematize
-  -> Expand
-  -> Harden
-  -> Ship
-```
-
-## Understand
-
-The system determines:
-
-- who the website is for;
-- what situation brought the visitor to the site;
-- what the business offers;
-- why the offer is different;
-- what action the visitor should take;
-- what claims can be supported;
-- what remains unknown.
-
-## Specify
-
-The understanding is converted into a durable contract that defines:
-
-- website outcomes;
-- user journeys;
-- sitemap;
-- page jobs;
-- message hierarchy;
-- proof requirements;
-- design intent;
-- functional behavior;
-- responsive requirements;
-- accessibility requirements;
-- acceptance criteria.
-
-## Prove
-
-The system chooses one small but complete user experience and implements it from beginning to end.
-
-This is called the **tracer experience**.
-
-The tracer is not necessarily the homepage. It is the smallest experience that tests the important assumptions of the project.
-
-Examples:
-
-- Service business: homepage to enquiry form
-- Directory: search to listing to detail page
-- Membership site: landing page to registration entry
-- Ecommerce site: category to product to cart entry
-- Content site: article discovery to article to newsletter signup
-
-## Systematize
-
-Only after the tracer works does the agent extract reusable patterns:
-
-- global primitives;
-- components;
-- component variants;
-- content seams;
-- composition rules;
-- responsive behavior;
-- ACSS token usage;
-- justified custom CSS exceptions.
-
-## Expand
-
-The remaining work is divided into complete user-observable tickets. Each ticket should deliver a useful page, journey, or capability rather than one technical layer.
-
-## Harden
-
-The complete website is reviewed against the contract using actual browser evidence.
-
-## Ship
-
-The production candidate is deployed and then verified again on the live URL.
+Avoid using the first pilot for a large ecommerce, membership, multilingual, or highly regulated website.
 
 ---
 
 # 4. Install the skills
 
-The exact installation method depends on your agent environment.
-
-## Option A: Agent Skills-compatible environment
-
-Run:
+## Agent Skills-compatible harness
 
 ```bash
 npx skills@latest add sathyvelukunashegaran/agentic-etch-production
 ```
 
-After installation, confirm that the five workflows are visible:
+Select the skills required by your harness. At minimum, install the setup and router workflows so the system can orient itself.
 
-```text
-setup-etch-production
-ask-etch-production
-grill-website
-deliver-etch-site
-ship-etch-site
-```
+## Claude Code plugin
 
-## Option B: Claude Code plugin
-
-Add the marketplace:
+Inside Claude Code:
 
 ```text
 /plugin marketplace add sathyvelukunashegaran/agentic-etch-production
-```
-
-Install the plugin:
-
-```text
 /plugin install agentic-etch-production@sathyvelukunashegaran
 ```
 
-Restart or refresh the agent session if your environment requires it.
+Reload the session if newly installed skills do not appear.
 
-## Option C: Manual use
-
-You can clone the repository and point your agent environment at the skill directories.
+## Manual repository checkout
 
 ```bash
 git clone https://github.com/sathyvelukunashegaran/agentic-etch-production.git
 ```
 
-The skills live in:
+The skills are under:
 
 ```text
 skills/workflows/
 skills/disciplines/
 ```
 
-Manual installation varies by agent platform. The important requirement is that each skill's `SKILL.md` and supporting files are available to the agent.
+Manual installation differs by agent harness. The harness must expose each `SKILL.md` and its references or scripts.
 
 ## Confirm installation
 
-Ask your agent:
+Ask the agent:
 
 ```text
-List the Agentic Etch Production workflows available in this session. Do not run any workflow yet.
+List the Agentic Etch Production workflows and disciplines available in this session. Do not start a workflow yet.
 ```
 
-You should see the five workflows and, ideally, the eight model-invoked disciplines.
+You should see the workflows listed in this guide and the eight disciplines.
 
 ---
 
-# 5. Prepare your website project
+# 5. Create a project
 
-The skills repository and your website project are separate things.
+The skills repository and the website project are different repositories or folders.
 
-- The **skills repository** contains the reusable operating method.
-- The **website project** contains one client's or one business's actual website files and decisions.
+- The **skills repository** contains the reusable operating system.
+- The **website project** contains one real website and its decisions.
 
-Do not put client-specific strategy into the skills repository.
+Do not store client-specific strategy in the skills repository.
 
-## Create the project memory files
+## New project
 
-From a checkout of Agentic Etch Production, run:
-
-```bash
-node scripts/scaffold-project.mjs /path/to/your/wordpress-project
-```
-
-Example on macOS:
+The scaffold script belongs to a local checkout of Agentic Etch Production.
 
 ```bash
-node scripts/scaffold-project.mjs ~/Sites/acme-website
+cd /path/to/agentic-etch-production
+node scripts/scaffold-project.mjs /path/to/website-project
 ```
 
-Example when already inside the target project:
+Example:
 
 ```bash
-node /path/to/agentic-etch-production/scripts/scaffold-project.mjs .
+cd ~/Code/agentic-etch-production
+node scripts/scaffold-project.mjs ~/Sites/acme-consulting
 ```
 
-The command creates:
+You may call the script by absolute path while standing elsewhere:
 
-```text
-CONTEXT.md
-SITE-CONTRACT.md
-DELIVERY-STATE.md
-docs/agents/stack.md
-docs/site/evidence.md
-docs/site/component-grammar.md
+```bash
+node ~/Code/agentic-etch-production/scripts/scaffold-project.mjs ~/Sites/acme-consulting
 ```
 
-Existing files are preserved by default.
-
-## Force replacement
-
-Use `--force` only when you intentionally want to replace existing scaffold files:
+Existing files are preserved unless you explicitly pass `--force`.
 
 ```bash
 node scripts/scaffold-project.mjs /path/to/project --force
 ```
 
-Do not use `--force` on a real project unless you have reviewed or backed up the existing project-memory files.
+Use `--force` only after reviewing or backing up existing artifacts.
 
-## Commit the empty scaffold
-
-It is useful to commit the starting files before the workflow begins:
+## Commit the initial artifacts
 
 ```bash
-git add CONTEXT.md SITE-CONTRACT.md DELIVERY-STATE.md docs/
-git commit -m "initialize agentic website workflow"
+git add CONTEXT.md PRODUCT.md SITE-CONTRACT.md DESIGN.md DELIVERY-STATE.md docs/
+git commit -m "initialize website production artifacts"
 ```
 
-This makes later changes easy to inspect.
+This gives you a clean history for later approvals and changes.
 
 ---
 
-# 6. Understand the project files
+# 6. Understand the nine project artifacts
 
-These files are the memory of the workflow. They allow a fresh agent session to continue without reading every previous conversation.
+The artifacts are the memory of the system. A fresh agent should be able to continue from them without the original conversation.
 
-## `CONTEXT.md`
-
-This file defines the business and product vocabulary.
+## `CONTEXT.md` — domain language
 
 Use it for:
 
-- exact meanings of important terms;
-- names of services, plans, products, audiences, or programs;
-- terminology that should be used consistently;
-- terminology that should be avoided.
+- precise meanings of business terms;
+- product, service, plan, and audience names;
+- accepted abbreviations;
+- terminology that should be avoided;
+- distinctions that matter to the business.
 
-Do not use it for:
-
-- implementation details;
-- temporary design ideas;
-- ticket status;
-- code architecture.
+Do not use it for implementation plans or ticket status.
 
 Example:
 
 ```markdown
 | Term | Meaning | Avoid |
 |---|---|---|
-| Strategy Sprint | A two-week paid engagement that produces a validated website direction | Discovery call, consultation package |
-| Qualified lead | A decision-maker with an active project, budget, and launch window | Any email subscriber |
+| Website Sprint | A fixed-scope strategy, copy, and implementation engagement | Web design package |
+| Qualified project | A project with a decision-maker, active need, budget, and launch window | Any enquiry |
 ```
 
-## `SITE-CONTRACT.md`
+## `PRODUCT.md` — product and business context
 
-This is the most important strategic file.
-
-It defines what the website must accomplish.
-
-It should eventually contain:
+This owns:
 
 - business outcome;
 - users and triggering situations;
-- offer and differentiation;
+- offer and meaningful differentiation;
+- conversion intent;
+- voice and language;
+- brand, product, or hybrid design register;
+- physical-use context;
+- references and anti-references;
+- proof posture and constraints;
+- excluded scope;
+- open product decisions.
+
+It answers: **What are we making this website for, and what product truth should every later decision respect?**
+
+## `SITE-CONTRACT.md` — website obligations
+
+This owns:
+
+- website outcome;
 - conversion paths;
 - information architecture;
 - page contracts;
-- visual register;
-- content model;
-- functionality;
-- responsive obligations;
-- accessibility obligations;
-- out-of-scope boundaries;
-- open decisions.
+- content and dynamic-data requirements;
+- functional and integration behavior;
+- responsive and accessibility obligations;
+- SEO and performance obligations;
+- acceptance criteria;
+- excluded website behavior.
 
-The status should remain `draft` until you explicitly approve it.
+It answers: **What must the website do?**
 
-## `DELIVERY-STATE.md`
+It should not prescribe the complete visual solution. That belongs in `DESIGN.md`.
 
-This is the execution ledger.
+## `DESIGN.md` — visual contract
 
-It records:
+This owns:
 
-- the current movement;
-- completed work;
-- blockers;
+- selected design register;
+- physical-use context;
+- approved visual direction;
+- rejected directions and reasons;
+- composition and hierarchy;
+- typography system;
+- color strategy and roles;
+- spacing, shape, and border language;
+- imagery, illustration, and icon direction;
+- motion and interaction language;
+- signature motifs;
+- responsive priorities;
+- state coverage;
+- accessibility and performance constraints;
+- visual anti-patterns;
+- approved deviations and risks.
+
+It answers: **What should the implemented website look and feel like, and which visual decisions are already approved?**
+
+## `DELIVERY-STATE.md` — execution ledger
+
+This owns:
+
+- current system version;
+- current stage;
+- current ticket;
+- completed approval gates;
 - current frontier;
-- delivery ticket links;
+- blockers;
+- ticket links;
 - verification status;
-- session handoff information.
+- accepted deviations;
+- session handoff.
 
-The agent should update it at meaningful boundaries, especially before ending a session.
+Update it whenever a stage changes and before ending a substantial agent session.
 
-## `docs/agents/stack.md`
+## `docs/agents/stack.md` — capability evidence
 
-This file records verified technical capabilities.
+This owns evidence-backed status for:
 
-It should answer:
+- WordPress;
+- Etch version and available operations;
+- Automatic.css version and token sources;
+- browser and screenshot tools;
+- accessibility, console, network, and performance tools;
+- native image generation;
+- browser prototype capability;
+- environments;
+- deployment, backup, and rollback;
+- issue tracker;
+- approval authority.
 
-- Is WordPress confirmed?
-- Is Etch confirmed?
-- Which Etch operations are available?
-- Is Automatic.css confirmed?
-- Where are the ACSS tokens documented or discoverable?
-- What browser tools are available?
-- Which staging and production environments exist?
-- How is deployment performed?
-- How is rollback performed?
-- Which issue tracker is used?
+Use the statuses:
 
-A capability must have evidence. Intention is not evidence.
+- `verified` — direct evidence exists;
+- `unavailable` — the capability is known not to exist;
+- `unknown` — it has not yet been verified.
 
-## `docs/site/evidence.md`
+## `docs/site/evidence.md` — proof register
 
-This file maps claims to evidence.
-
-Example:
+Every meaningful public claim maps to evidence.
 
 ```markdown
 | ID | Claim | Classification | Source | Confidence | Permissible wording | Status |
 |---|---|---|---|---|---|---|
-| E-001 | 150 projects delivered | verified fact | CRM export dated 2026-07-01 | high | More than 150 projects delivered | approved |
-| E-002 | Best agency in Malaysia | unavailable | none | low | Do not publish | blocked |
+| E-001 | 150 projects delivered | verified fact | CRM export, 2026-07-01 | high | More than 150 projects delivered | approved |
+| E-002 | Malaysia's leading studio | unavailable | none | low | Do not publish | blocked |
 ```
 
-## `docs/site/component-grammar.md`
+A strong marketing idea is not permission to invent proof.
 
-This file defines the reusable interface language after the tracer has been tested.
+## `docs/site/component-grammar.md` — proven reusable interface contracts
 
-It should not become a speculative catalogue of everything the site might need.
+Use this only after rendered implementation proves stable patterns.
 
 For each component, record:
 
 - responsibility;
-- inputs;
+- public inputs;
 - content seam;
 - variants;
 - allowed compositions;
+- states;
 - responsive behavior;
 - accessibility obligations;
-- ACSS usage;
-- custom CSS exceptions.
+- ACSS tokens;
+- custom styling exceptions;
+- correct and incorrect usage.
+
+Do not turn every repeated rectangle into a component.
+
+## `docs/site/delivery-plan.md` — tracer and ticket topology
+
+This owns:
+
+- selected tracer experience;
+- tracer acceptance criteria;
+- vertical delivery tickets;
+- dependencies and blocking edges;
+- current frontier;
+- collision risks and shared seams;
+- fresh-context boundaries;
+- deferred scope.
+
+It answers: **What is safe and valuable to build next?**
+
+## Ownership rule
+
+A decision should have one authoritative home.
+
+Bad:
+
+```text
+Audience definition copied into PRODUCT.md, SITE-CONTRACT.md, DESIGN.md, and every ticket.
+```
+
+Better:
+
+```text
+PRODUCT.md owns the audience definition.
+Other files cite the relevant section.
+```
 
 ---
 
-# 7. Choose the correct workflow
+# 7. Choose the next workflow
 
-When you are uncertain, run:
+Run:
 
 ```text
 /ask-etch-production
 ```
 
-The router should recommend one of the main workflows.
+The router should read durable state and recommend exactly one workflow.
 
-## Use `/setup-etch-production` when
+Typical routing logic:
 
-- the project has never used this system;
-- project-memory files are missing;
-- Etch capability is unclear;
-- ACSS capability is unclear;
-- browser verification is not configured;
-- deployment or rollback is unknown.
+| Current condition | Recommended workflow |
+|---|---|
+| Artifacts or capability evidence missing | `/setup-etch-production` |
+| Product, audience, offer, voice, conversion, or proof unclear | `/grill-website` |
+| Product approved, page contracts missing | `/specify-website` |
+| Site contract approved, visual direction missing | `/shape-website` |
+| Product, site, and design approved, tickets missing | `/plan-website-delivery` |
+| Approved ticket is unblocked | `/implement-website-ticket` |
+| Tracer or release candidate needs independent verification | `/review-website` |
+| Review passed and launch safety is ready | `/ship-etch-site` |
 
-## Use `/grill-website` when
+Example prompt:
 
-- the audience is vague;
-- the offer is unclear;
-- the business says the website is "for everyone";
-- page purpose is unknown;
-- the sitemap is based on habit rather than user journeys;
-- copy depends on unsupported claims;
-- the website has no clear conversion path.
+```text
+/ask-etch-production
 
-## Use `/deliver-etch-site` when
-
-- setup is complete;
-- the site contract is approved;
-- you are ready to specify or build the tracer;
-- the tracer is ready to become a reusable system;
-- remaining pages need to be ticketed and delivered;
-- the full site needs hardening.
-
-## Use `/ship-etch-site` when
-
-- the entire site is complete;
-- hardening is complete;
-- launch blockers are resolved;
-- deployment and rollback are known;
-- you are ready to verify the production environment.
+Read the durable project artifacts and recommend exactly one next workflow. Explain the current state, unmet preconditions, and which artifact the workflow should create or update. Do not run the workflow yet.
+```
 
 ---
 
-# 8. Run setup
+# 8. Run project setup
 
-Open the website project in your agent environment and run:
+Run inside the website project:
 
 ```text
 /setup-etch-production
 ```
 
-A useful accompanying prompt is:
+Recommended prompt:
 
 ```text
-Inspect this repository and configure it for Agentic Etch Production. Verify WordPress, Etch, Automatic.css, browser tooling, environments, deployment, rollback, and issue tracking. Do not assume a capability merely because the project intends to use it. Record findings in the project artifacts and ask me only about decisions that cannot be discovered from the environment.
+Inspect this repository and configure it for Agentic Etch Production v0.2. Verify WordPress, Etch, Automatic.css, browser tooling, visual-exploration capability, environments, deployment, backup, rollback, issue tracking, and approval authority. Search the environment for factual answers before asking me. Record each capability as verified, unavailable, or unknown with evidence. Preserve existing project files.
 ```
 
 ## What setup should inspect
 
-The agent should inspect:
-
-- repository structure;
-- existing `AGENTS.md` or `CLAUDE.md`;
-- WordPress files or configuration;
-- Etch installation or connection evidence;
-- ACSS installation and token evidence;
-- local or remote browser tools;
-- staging and production configuration;
-- deployment scripts or hosting integration;
-- rollback method;
-- issue tracker;
-- existing project documentation.
+- repository structure and existing agent instructions;
+- WordPress signals and configuration;
+- Etch installation and version evidence;
+- actual Etch operations available to the agent;
+- ACSS installation, version, token source, and overrides;
+- existing pages, theme, components, and visual system;
+- browser, screenshot, DOM, accessibility, console, network, and performance tools;
+- image-generation, image-search, or prototype capability;
+- local, staging, and production environments;
+- deployment, backup, and rollback;
+- issue tracker and ticket links;
+- approval authority.
 
 ## What setup should not do
 
-Setup should not:
-
 - start designing pages;
-- create final copy;
-- invent missing integrations;
-- claim that Etch is controllable without evidence;
-- overwrite existing project instructions;
-- mark unknown capabilities as verified.
+- invent an Etch API or operation;
+- invent ACSS token names;
+- mark a planned capability as verified;
+- overwrite existing approved content;
+- silently change existing `AGENTS.md` or `CLAUDE.md` rules.
 
-## Review the result
+## Review setup output
 
-Open `docs/agents/stack.md` and check that each major capability is one of:
-
-- verified;
-- unavailable;
-- unknown.
-
-Bad entry:
+Bad capability record:
 
 ```markdown
 ## Etch
-Status: available because the client wants to use Etch
+Status: verified because the project is intended to use Etch.
 ```
 
-Good entry:
+Good capability record:
 
 ```markdown
 ## Etch
-Status: verified
-Evidence: Etch plugin version shown in project environment and page editor successfully opened
-Available operations: inspect page tree, edit text, add class, preview page
-Unverified operations: reusable component creation, dynamic data binding, publishing
+**Status:** verified
+**Version or capability evidence:** Plugin version visible in the environment; homepage editor opened successfully.
+**Available operations:** Inspect element tree, edit text, apply an existing class, preview page.
+**Unavailable or unverified operations:** Reusable component creation, dynamic query binding, publishing.
 ```
 
-Do not proceed to implementation while a required operation remains unknown.
+If a required operation remains unknown, the relevant implementation seam remains blocked.
 
 ---
 
-# 9. Clarify the website
+# 9. Grill the product
 
 Run:
 
@@ -599,200 +588,454 @@ Run:
 /grill-website
 ```
 
-A useful prompt is:
+Recommended prompt:
 
 ```text
-Help me clarify this website rigorously. Ask one decision question at a time, recommend an answer, challenge vague claims, and update CONTEXT.md, SITE-CONTRACT.md, and docs/site/evidence.md as decisions become clear. Do not start implementation.
+Run a rigorous product clarification session. Ask one decision question at a time, recommend an answer, challenge vague audiences and generic differentiation, and update CONTEXT.md, PRODUCT.md, and docs/site/evidence.md as decisions become clear. Do not specify pages or begin design implementation.
 ```
 
-## Why the workflow asks questions
+## What the grilling session resolves
 
-The workflow is designed to discover decisions that cannot be found in the repository.
+- business outcome;
+- primary users;
+- triggering situations;
+- offer;
+- meaningful differentiation;
+- conversion intent;
+- voice and vocabulary;
+- proof posture;
+- design register;
+- physical-use context;
+- visual references;
+- anti-references;
+- constraints;
+- explicit exclusions.
 
-The agent should research facts from available materials and ask you only about choices such as:
+## Weak and stronger answers
 
-- which audience matters most;
-- what outcome matters most;
-- which action is the primary conversion;
-- which offer should lead;
-- what the business is willing to claim;
-- what visual register fits the brand;
-- what is intentionally out of scope.
-
-## Good answers versus weak answers
-
-Weak audience answer:
+Weak audience:
 
 ```text
-Small businesses and anyone who needs a website.
+Small businesses that need a website.
 ```
 
-Stronger answer:
+Stronger audience:
 
 ```text
-Owner-led service businesses with an existing offer, weak online positioning, and a launch or relaunch planned within the next three months.
+Owner-led service businesses with an established offer, weak online positioning, and a launch or relaunch planned within the next three months.
 ```
 
-Weak conversion answer:
+Weak conversion intent:
 
 ```text
-Get in touch.
+Get people to contact us.
 ```
 
-Stronger answer:
+Stronger conversion intent:
 
 ```text
-The primary conversion is a qualified project application. Visitors who are not ready can download the website planning guide as the secondary action.
+The primary conversion is a qualified project application. Visitors who are not ready may download the planning guide as a secondary conversion.
 ```
 
 Weak differentiation:
 
 ```text
-We provide high-quality service and care about customers.
+High-quality work and excellent customer service.
 ```
 
 Stronger differentiation:
 
 ```text
-The engagement combines positioning, copy, and implementation in one accountable team, reducing the handoff gap between strategy and production.
+Strategy, evidence-backed copy, and implementation are delivered by one accountable team, reducing the handoff gap that usually weakens website projects.
 ```
 
-## What must be resolved
+## References and anti-references
 
-Before approval, the workflow should resolve:
+A reference is useful only when you can say what should be learned from it.
 
-1. Business outcome
-2. Primary users
-3. Triggering situations
-4. Offer
-5. Differentiation
-6. Primary conversion
-7. Secondary conversion
-8. Sitemap
-9. Page jobs
-10. Message hierarchy
-11. Proof obligations
-12. Visual register
-13. Functional requirements
-14. Responsive requirements
-15. Accessibility requirements
-16. Out-of-scope boundaries
-17. Open risks
-
----
-
-# 10. Approve the site contract
-
-The site contract is a decision boundary.
-
-Implementation should not scale until the contract is approved.
-
-## Review the contract
-
-Check whether a fresh person could answer:
-
-- Who is the site for?
-- What problem or situation brought them here?
-- What does the business offer?
-- Why should the visitor believe it?
-- What should the visitor do next?
-- Why does each major page exist?
-- Which claims are supported?
-- What does success look like?
-- What is not included?
-
-## Approval wording
-
-You can approve with a clear instruction such as:
+Bad:
 
 ```text
-I approve SITE-CONTRACT.md as the current delivery contract. Mark it approved and record today's date. Any material change to audience, offer, conversion, sitemap, or proof should return for approval.
+Make it like Apple.
 ```
 
-Approval should be recorded in the file, not only remembered in chat.
+Better:
 
-Example:
-
-```markdown
-**Status:** approved
-**Approved by:** Sathy Velukunashegaran
-**Approved on:** 2026-07-14
+```text
+Reference Apple only for disciplined product photography and restrained hierarchy. Do not copy the oversized type, monochrome palette, or product-launch rhythm.
 ```
 
-## Changes after approval
+An anti-reference identifies a direction the project must avoid.
 
-The contract may change, but changes must be explicit.
+```text
+Avoid generic agency pages built from identical rounded cards, purple-blue gradients, stock metrics, and a tiny uppercase label above every section heading.
+```
 
-A material change includes:
+## Approve `PRODUCT.md`
 
-- changing the primary audience;
-- adding a new offer;
-- changing the main conversion;
-- adding a new page type;
-- making a new unsupported claim;
-- changing the visual direction substantially;
-- adding a major functional requirement.
+Example approval:
 
-Record the change and approval rather than silently changing implementation.
+```text
+I approve PRODUCT.md as the current product context. Record my name and today's date. Any material audience, offer, voice, conversion, proof, or design-register change must be approved again.
+```
+
+Approval belongs in the file, not only in chat.
 
 ---
 
-# 11. Deliver the first tracer experience
+# 10. Specify the website
 
 Run:
 
 ```text
-/deliver-etch-site
+/specify-website
 ```
 
-A useful starting prompt is:
+Recommended prompt:
 
 ```text
-Begin delivery from the approved site contract. Select the smallest end-to-end tracer experience that gives us the most architectural learning. Write its acceptance criteria before implementation. Do not expand into the full website until the tracer has passed rendered review.
+Synthesize the approved product context and evidence into SITE-CONTRACT.md. Create the minimum information architecture needed for the approved conversion paths. Write observable page contracts for every in-scope page type. Ask only about unresolved decisions that block a coherent specification. Do not choose the final visual direction.
+```
+
+## Information architecture
+
+Do not begin with a conventional list of pages. Begin with user journeys.
+
+Example:
+
+```text
+Visitor recognizes fit
+→ understands the primary service
+→ sees relevant proof
+→ evaluates project fit
+→ completes an application
+→ receives confirmation and next steps
+```
+
+Pages should exist because they advance a journey, resolve uncertainty, satisfy a requirement, or support necessary discovery.
+
+## Page contract
+
+Each important page or reusable page type should record:
+
+- user and triggering situation;
+- page job;
+- entry conditions;
+- primary conversion;
+- fallback action;
+- message hierarchy;
+- content sequence;
+- proof obligations and evidence IDs;
+- dynamic content;
+- empty, loading, error, and success states;
+- interactions and integrations;
+- responsive obligations;
+- accessibility obligations;
+- SEO and performance obligations;
+- observable acceptance criteria;
+- out-of-scope behavior.
+
+Example:
+
+```markdown
+## Primary service page
+
+### User and situation
+An owner-led consultancy knows its current website undersells a credible offer and is evaluating whether this engagement fits an upcoming relaunch.
+
+### Page job
+Help a qualified visitor understand the service, evaluate fit, trust the delivery model, and begin an application.
+
+### Primary conversion
+Start project application.
+
+### Proof obligations
+- E-004: completed project count
+- E-007: client testimonial about integrated strategy and implementation
+- E-011: before-and-after case result
+
+### Acceptance criteria
+- The first viewport identifies the audience, problem, and service.
+- The primary CTA reaches the application flow.
+- Every substantive outcome claim maps to approved evidence.
+- Keyboard users can complete the journey.
+- The page has no horizontal overflow at required target widths.
+```
+
+## Separate requirements from visual solutions
+
+Site contract:
+
+```text
+The visitor must be able to compare three engagement options without losing the recommended path.
+```
+
+Design contract later decides whether that becomes a table, guided selector, progressive disclosure, or another composition.
+
+## Approve `SITE-CONTRACT.md`
+
+Example:
+
+```text
+I approve SITE-CONTRACT.md as the delivery contract. Record the approval. Any material change to page jobs, conversion paths, required proof, functionality, or acceptance criteria must be approved again.
+```
+
+---
+
+# 11. Shape the visual direction
+
+Run:
+
+```text
+/shape-website
+```
+
+Recommended prompt:
+
+```text
+Shape the visual direction from the approved PRODUCT.md and SITE-CONTRACT.md. Inspect the existing design system first. Keep the four approval gates separate: shape brief, direction questions, visual evidence, and direction approval. Produce materially different directions rather than palette variations. Do not begin production implementation.
+```
+
+## Gate 1: Shape brief
+
+Confirm:
+
+- target surface;
+- user and page job;
+- content hierarchy;
+- conversion priority;
+- existing system and assets;
+- technical constraints;
+- brand, product, or hybrid register;
+- scope of the design decision.
+
+A small, clear page may need a compact brief. A stakeholder-heavy or multi-surface project may need a fuller one.
+
+## Gate 2: Direction questions
+
+Resolve:
+
+- atmosphere and emotional register;
+- density;
+- typography character;
+- color commitment;
+- imagery and art direction;
+- icon language;
+- shape and border character;
+- motion and interaction character;
+- physical-use context;
+- reference lessons;
+- anti-reference boundaries.
+
+## Gate 3: Visual evidence
+
+Depending on the harness, use:
+
+- generated visual mock directions;
+- browser prototypes;
+- structured page compositions;
+- a small set of real components arranged in alternative directions.
+
+Directions must differ materially in:
+
+- composition;
+- hierarchy;
+- atmosphere;
+- density;
+- imagery;
+- signature visual moves.
+
+A blue version and a green version of the same layout are not separate directions.
+
+If native image generation is unavailable, the agent should say so explicitly and use browser prototypes or a precise structured direction. It must not silently skip visual evidence.
+
+## Gate 4: Approval
+
+You may:
+
+- approve one direction;
+- combine explicitly named parts of directions;
+- reject all directions and request another exploration;
+- delegate a narrow decision to the agent.
+
+Record selected and rejected directions in `DESIGN.md`.
+
+## Design contract example
+
+```markdown
+## Approved direction
+Editorial precision with a committed deep-red field, off-white content surfaces, high-contrast serif display type, restrained sans-serif utility type, documentary project imagery, and asymmetric proof compositions.
+
+## Signature motifs
+- Full-width red editorial bands at major transitions
+- Large cropped project imagery paired with narrow evidence columns
+- Inline evidence labels instead of floating icon cards
+
+## Anti-patterns
+- No repeated three-card grids unless the content is genuinely peer-level
+- No gradient text
+- No tiny uppercase eyebrow above every heading
+- No generic glass panels
+
+## Responsive priorities
+- Preserve proof next to the claim it supports
+- Keep application CTA reachable after every major decision section
+- Recompose asymmetric pairs into a deliberate sequence rather than stacking blindly
+```
+
+Do not begin production implementation until `DESIGN.md` is approved.
+
+---
+
+# 12. Plan the tracer and delivery tickets
+
+Run:
+
+```text
+/plan-website-delivery
+```
+
+Recommended prompt:
+
+```text
+Turn the approved product, site, and design contracts into a tracer-first delivery plan. Select the smallest complete experience with the highest architectural learning value. Define acceptance criteria before creating the remaining vertical tickets. Record blocking edges, collision risks, fresh-context boundaries, and the current frontier.
 ```
 
 ## Choose the tracer
 
-The best tracer is:
+The tracer is the smallest complete user experience that tests the important system assumptions.
 
-- small enough to complete;
-- complete enough for a real user to experience;
-- strategically important;
-- technically representative;
-- likely to reveal component, Etch, ACSS, responsive, and content problems.
+A strong tracer tests several of these together:
 
-## Example tracer for a service business
+- product positioning;
+- evidence-backed copy;
+- approved visual direction;
+- component boundaries;
+- Etch operations;
+- ACSS token usage;
+- dynamic data or forms;
+- states;
+- responsive composition;
+- accessibility;
+- browser verification.
 
-```text
-Homepage hero
--> primary service explanation
--> proof section
--> project-fit section
--> application CTA
--> application form
--> confirmation state
-```
+The homepage is not automatically the tracer.
 
-## Example tracer acceptance criteria
+Examples:
+
+| Website type | Possible tracer |
+|---|---|
+| Service business | Homepage to qualified application confirmation |
+| Directory | Search to listing to detail page |
+| Content publication | Article discovery to article to newsletter confirmation |
+| Membership | Landing page to registration entry and error state |
+| Ecommerce | Category to product to cart entry |
+
+## Write tracer acceptance criteria first
 
 ```markdown
-### Homepage-to-application tracer
+## Homepage-to-application tracer
 
-- The intended audience can identify that the service is for them within the first viewport.
-- The primary value proposition matches the approved message hierarchy.
-- Every substantive claim has an approved evidence reference.
-- The primary CTA leads to the application form.
-- The form contains required labels, errors, and confirmation behavior.
-- Keyboard users can complete the journey.
-- No horizontal overflow exists at 360px, 768px, 1024px, and 1440px.
-- ACSS tokens are used for system spacing, typography, colors, and widths.
-- Any custom CSS exception is documented in the component grammar.
-- The rendered journey has been reviewed in a real browser.
+- Intended visitors can recognize fit in the first viewport.
+- The approved message hierarchy and visual direction are preserved.
+- All substantive claims map to approved evidence.
+- The primary CTA reaches the application form.
+- Default, focus, validation-error, submitting, success, and failure states exist.
+- The journey is keyboard-completable.
+- Required target widths have no unintended overflow.
+- ACSS owns system spacing, typography, color, and width values.
+- Custom CSS exceptions are scoped and documented.
+- Browser screenshots, DOM checks, console checks, and network checks are recorded.
 ```
 
-## Implementation sequence
+## Create vertical tickets
 
-The workflow should explicitly load the disciplines in this order when relevant:
+Bad decomposition:
+
+```text
+Write all copy
+Build all pages
+Add all CSS
+Make everything responsive
+Do accessibility
+```
+
+Better decomposition:
+
+```text
+WEB-001: Deliver the global shell and homepage application tracer
+WEB-002: Extract the proven component grammar from the tracer
+WEB-003: Deliver the primary service enquiry journey
+WEB-004: Deliver the case-study discovery and detail journey
+WEB-005: Migrate remaining services onto the approved page architecture
+WEB-006: Harden the full site against all contracts
+```
+
+Each ticket should include:
+
+- stable ID;
+- user-visible outcome;
+- included and excluded scope;
+- page-contract references;
+- design-contract references;
+- evidence IDs;
+- dependencies and blocking edges;
+- required capabilities and disciplines;
+- acceptance criteria;
+- browser evidence requirements;
+- files or artifacts that may change;
+- handoff requirements.
+
+## Current frontier
+
+The frontier is the set of approved, unblocked tickets that are safe to start now.
+
+Example:
+
+```markdown
+## Current frontier
+
+- WEB-001: Global shell and homepage application tracer
+
+Blocked:
+- WEB-002 depends on rendered completion of WEB-001
+- WEB-003 depends on WEB-002 component extraction
+- WEB-004 may begin after the global shell in WEB-001 is stable
+```
+
+Approve the tracer and delivery topology before implementation scales.
+
+---
+
+# 13. Implement one ticket
+
+Use a fresh agent session for each substantial ticket.
+
+Run:
+
+```text
+/implement-website-ticket WEB-001
+```
+
+Recommended prompt:
+
+```text
+Implement WEB-001 only. Read all nine durable artifacts first. Confirm the ticket is on the current frontier and all blockers are resolved. Restate the user-visible outcome and acceptance criteria. Load only the required disciplines. Use continuous rendered iteration and finish with an independent standards-and-contract review. Update DELIVERY-STATE.md and the delivery plan before ending.
+```
+
+## Start-of-ticket checks
+
+The agent should verify:
+
+- the named ticket exists;
+- dependencies are complete;
+- required product, site, and design decisions are approved;
+- Etch and ACSS capabilities needed by the ticket are verified;
+- the target environment is known;
+- acceptance criteria are observable;
+- shared components or files are not being changed concurrently by another agent.
+
+## Typical discipline sequence
 
 1. `website-copy`
 2. `web-design`
@@ -801,417 +1044,338 @@ The workflow should explicitly load the disciplines in this order when relevant:
 5. `acss`
 6. `rendered-review`
 
-The agent should then repeat:
+Not every ticket requires every discipline, but substantial page work usually touches most of them.
+
+## Implementation loop
 
 ```text
-Implement
--> Render
--> Inspect
--> Compare with contract
--> Correct
--> Render again
+implement
+→ render
+→ inspect
+→ compare with ticket and design contracts
+→ correct
+→ render again
 ```
 
-## Do not accept source-only completion
+Use this loop throughout the ticket, not only at the end.
 
-The following is not sufficient:
+## Preserve the approved direction
 
-```text
-The classes are present and the HTML looks correct, so the page is complete.
-```
+The following are blocking fidelity defects unless explicitly accepted:
 
-The page must be rendered and checked.
+- major approved composition is missing;
+- intended imagery is replaced with generic decorative panels;
+- navigation or CTA treatment changes materially;
+- signature motifs disappear;
+- hierarchy becomes generic;
+- density changes enough to alter the character;
+- responsive behavior destroys proof adjacency or action priority.
 
-If browser access is unavailable, the status must be:
+## Cover realistic states
 
-```text
-Implemented but unverified
-```
+Depending on the ticket:
 
-not:
+- default;
+- hover;
+- focus-visible;
+- active;
+- disabled;
+- loading;
+- validation error;
+- integration error;
+- success;
+- empty;
+- long content;
+- short content;
+- missing media;
+- first use;
+- returning use.
 
-```text
-Passed
-```
+## Respect the ACSS token boundary
+
+Order of preference:
+
+1. verified semantic ACSS tokens and global configuration;
+2. verified ACSS utilities or layout capabilities;
+3. stable component classes;
+4. scoped component custom properties or CSS when the system does not own the requirement.
+
+Never invent an ACSS variable name.
+
+Document justified exceptions in the component grammar.
+
+## Respect the Etch capability gate
+
+If a required operation is unknown:
+
+1. investigate available project tooling and official version-relevant evidence;
+2. run a disposable experiment when safe;
+3. record the result in `docs/agents/stack.md`;
+4. block the seam when capability cannot be verified.
+
+Do not replace implementation with a convincing description.
+
+## Run deterministic checks
+
+The browser audit detects issues such as:
+
+- missing document language or title;
+- missing or duplicate main landmarks;
+- heading-level jumps;
+- duplicate IDs;
+- images without `alt` attributes;
+- form controls without names;
+- actions without accessible names;
+- placeholder links;
+- horizontal overflow;
+- very small interactive targets;
+- basic rendered text-contrast failures.
+
+A zero-finding detector report does not mean the page is complete. You must still inspect screenshots, interactions, states, keyboard flow, console, network, performance, and contract fidelity.
+
+## Close the ticket
+
+Every criterion should be one of:
+
+- verified with browser evidence;
+- accepted deviation with approver and reason;
+- blocked with named owner and next action.
+
+Update:
+
+- `DELIVERY-STATE.md`;
+- `docs/site/delivery-plan.md`;
+- `docs/site/component-grammar.md` when proven patterns changed;
+- `docs/agents/stack.md` when capabilities changed;
+- relevant contracts when an approved change occurred.
 
 ---
 
-# 12. Turn the tracer into a reusable system
+# 14. Review independently
 
-After the tracer passes rendered review, the workflow enters **Systematize**.
-
-Now the agent can update:
+Run:
 
 ```text
-docs/site/component-grammar.md
+/review-website
 ```
 
-## Promote only proven patterns
+Use a fresh agent context when possible.
 
-A pattern deserves promotion when:
-
-- it has a stable responsibility;
-- it appears more than once or has clear high-leverage reuse;
-- its content can vary within a defined seam;
-- its responsive behavior is understood;
-- its accessibility obligations are known;
-- it has passed rendered review.
-
-## Example component entry
-
-```markdown
-## Proof card
-
-**Responsibility:** Present one specific credibility signal next to the claim it supports.
-
-**Inputs:**
-- proof type
-- headline
-- supporting text
-- source label
-- optional image
-
-**Content seam:** Text length may vary within the documented limits; proof type may be testimonial, metric, certification, or case result.
-
-**Variants:**
-- compact
-- featured
-
-**Responsive behavior:**
-- three-column layout at wide widths
-- one-column sequence below the project grid breakpoint
-
-**Accessibility:**
-- testimonial attribution remains text, not image-only
-- decorative quotation marks are ignored by assistive technology
-
-**ACSS:**
-- semantic spacing and typography tokens
-- project surface and border tokens
-
-**Custom CSS exception:**
-- none
-```
-
-## Avoid premature abstraction
-
-Do not create a universal component simply because two sections both contain a heading and text.
-
-The component must have a reusable responsibility, not merely a similar shape.
-
----
-
-# 13. Build the remaining website
-
-After systematizing the tracer, enter **Expand**.
-
-The remaining work should be divided into vertical delivery tickets.
-
-## Bad ticket decomposition
+Recommended prompt:
 
 ```text
-Create all CSS
-Build all headers
-Write all copy
-Make everything responsive
-Do accessibility
+Review the fixed release candidate independently. Read all durable artifacts. Run deterministic browser checks first, then review each qualitative axis separately. Record findings with severity, page, viewport, state, observed evidence, violated contract, smallest credible correction, disposition, owner, and re-verification. Do not infer a pass from source inspection.
 ```
 
-These tickets separate technical layers and delay usable outcomes.
-
-## Better ticket decomposition
-
-```text
-Deliver the primary service enquiry journey
-Deliver the case-study discovery and detail journey
-Deliver the reusable service-template architecture
-Migrate remaining services onto the approved template
-Deliver mobile navigation and global footer behavior
-```
-
-Each ticket should include:
-
-- purpose;
-- user-visible outcome;
-- relevant page contract;
-- dependencies;
-- blocking relationships;
-- required skills;
-- acceptance criteria;
-- rendered verification requirements.
-
-## Example ticket
-
-```markdown
-# Deliver primary service enquiry journey
-
-## Outcome
-A qualified visitor can understand the primary service, review relevant proof, and submit a project application.
-
-## Includes
-- primary service page
-- proof components
-- CTA transition
-- application form
-- confirmation state
-
-## Depends on
-- approved service page contract
-- approved proof entries E-004, E-006, and E-009
-- global navigation component
-
-## Acceptance criteria
-- page message hierarchy matches the contract
-- form works in browser
-- mobile and keyboard journeys pass rendered review
-- no invented ACSS tokens
-- component changes are recorded in component grammar
-```
-
-## Use fresh sessions
-
-For substantial tickets, begin a fresh agent session.
-
-Ask the new agent to read:
-
-```text
-CONTEXT.md
-SITE-CONTRACT.md
-DELIVERY-STATE.md
-docs/agents/stack.md
-docs/site/evidence.md
-docs/site/component-grammar.md
-```
-
-This is safer than continuing one extremely long conversation.
-
----
-
-# 14. Review the rendered website
-
-Rendered review is not a visual polish pass. It is a multi-axis verification process.
-
-## Review axis 1: Strategy and conversion
-
-Check:
+## Review axis 1: Product and conversion
 
 - Is the intended audience clear?
-- Does each page have one coherent job?
-- Can the visitor find the intended action?
-- Does the conversion path preserve trust and context?
-- Are secondary actions distracting from the primary action?
+- Does each page serve its approved job?
+- Does the journey preserve context and trust?
+- Is the primary action findable and appropriate?
+- Do secondary actions compete unnecessarily?
 
 ## Review axis 2: Copy and proof
 
-Check:
-
-- Does the copy follow the approved message hierarchy?
-- Are claims specific?
-- Does every important claim have evidence?
+- Does copy follow the approved message hierarchy?
+- Are claims specific and understandable?
+- Does every substantive claim have admissible evidence?
 - Is proof placed near the uncertainty it resolves?
-- Are calls to action suitable for the visitor's readiness?
+- Are calls to action appropriate to readiness?
 
-## Review axis 3: Visual hierarchy and component grammar
+## Review axis 3: Visual direction and craft
 
-Check:
+- Does implementation preserve the approved atmosphere and composition?
+- Are signature motifs present and purposeful?
+- Do typography, color, imagery, shape, and motion feel like one system?
+- Is hierarchy obvious?
+- Has generic card grammar replaced the approved direction?
+- Are spacing and alignment deliberate?
 
-- Is the most important information visually dominant?
-- Does spacing reveal structure?
+## Review axis 4: Components and ACSS
+
 - Are repeated components coherent?
-- Are variants intentional?
-- Has excessive card usage flattened the hierarchy?
-- Does the visual register match the audience and offer?
+- Are variants explicit?
+- Are content seams respected?
+- Are ACSS tokens real and correctly used?
+- Are custom CSS exceptions scoped and documented?
+- Are page-specific patches hiding a missing system decision?
 
-## Review axis 4: Responsive behavior and accessibility
+## Review axis 5: Responsive states and accessibility
 
-Check:
-
-- required widths;
+- required target widths;
+- stress widths around reflow points;
 - horizontal overflow;
-- reading order;
-- keyboard navigation;
+- reading and focus order;
+- keyboard completion;
 - visible focus;
-- landmarks;
-- heading hierarchy;
 - labels and error messages;
+- headings and landmarks;
 - contrast;
-- touch target size;
-- reduced-motion behavior;
-- content priority on small screens.
+- touch targets;
+- zoom;
+- reduced motion;
+- loading, error, success, empty, and long-content states.
 
-## Review axis 5: Stack integrity
+## Review axis 6: Stack and performance integrity
 
-Check:
+- Etch editor and frontend consistency;
+- dynamic WordPress data;
+- empty query states;
+- console errors;
+- runtime exceptions;
+- failed network requests;
+- broken assets;
+- unnecessary layout shift;
+- performance budgets;
+- integration behavior.
 
-- Etch editor and frontend agree;
-- dynamic WordPress data renders correctly;
-- empty states are handled;
-- ACSS tokens are valid;
-- custom CSS is scoped and documented;
-- no avoidable duplicate styles exist;
-- console errors are absent;
-- network requests succeed.
+## Review axis 7: Contract fidelity
 
-## Review axis 6: Contract fidelity
-
-Check:
-
-- Identify missing requirements.
-- Flag partially implemented requirements.
-- Find features that appeared without approval.
-- Note approved decisions contradicted by the implementation.
-- Record deviations that were consciously accepted.
+- missing requirements;
+- partial requirements;
+- unapproved features;
+- contradicted product decisions;
+- contradicted visual decisions;
+- incomplete ticket criteria;
+- accepted deviations without records.
 
 ## Finding format
 
-Use a consistent finding format:
-
 ```markdown
-### High: Application form errors are not announced
+### High — Form errors are not announced
 
-**Observed evidence:** Submitting an empty form displays red text visually, but focus remains on the submit button and no live region announces the error.
-
-**Contract:** Accessibility obligations require understandable form errors for keyboard and screen-reader users.
-
-**Correction:** Add an error summary, move focus to it after failed submission, and associate field errors with their inputs.
-
+**Axis:** Responsive states and accessibility
+**Page:** Project application
+**Viewport:** 390 × 844
+**State:** Empty form submission
+**Evidence:** Red messages appear visually, but focus remains on the submit button and no live region announces the summary.
+**Contract:** The application page requires understandable keyboard and screen-reader error recovery.
+**Correction:** Add an error summary, move focus to it, and associate field errors with inputs.
 **Disposition:** Open
+**Owner:** WEB-006
 ```
+
+After fixes, re-run the affected page and state. Do not close findings from source inspection alone.
 
 ---
 
 # 15. Ship the website
 
-Run:
+Run only after independent review passes:
 
 ```text
 /ship-etch-site
 ```
 
-Only run this after hardening is complete.
+Recommended prompt:
 
-## Pre-launch requirements
+```text
+Ship the reviewed release candidate using only the verified project deployment mechanism. Confirm backup, rollback, release scope, access, ownership, analytics, privacy, and form delivery before deployment. Then verify the live production URL independently and record the release in DELIVERY-STATE.md.
+```
 
-The workflow should confirm:
+## Pre-launch safety
 
-- exact release scope;
-- staging candidate;
+Confirm:
+
+- fixed release revision;
+- exact content state;
+- approved deviations;
 - backup or snapshot;
 - rollback procedure;
 - production access;
-- responsible owner;
+- release owner;
 - form-delivery owner;
 - analytics owner;
-- unresolved deviations;
-- launch blockers.
+- privacy and consent behavior;
+- monitoring or observability;
+- launch window and communication.
 
-## Production verification
+## Live production verification
 
-The live site must be checked separately from staging.
+Verify production separately from staging:
 
-Verify:
-
-- homepage loads;
+- homepage and critical pages load;
 - navigation works;
-- primary conversion works;
-- forms deliver correctly;
-- confirmation states work;
+- primary conversion completes;
+- forms deliver to the intended destination;
+- validation and confirmation states work;
 - dynamic content is present;
+- empty states are safe;
 - redirects work;
-- metadata is correct;
-- indexability is correct;
-- analytics fires;
+- canonical URL, title, and description are correct;
+- sitemap and robots behavior are correct;
+- social metadata is correct;
+- analytics events fire;
 - consent behavior works;
-- no production-only console or network errors appear;
-- required responsive widths still pass.
+- responsive targets pass;
+- keyboard path passes;
+- console and network are clean enough for release;
+- performance meets project budgets.
 
 ## Stop conditions
 
 Do not launch when:
 
-- rollback is unknown;
-- critical forms fail;
-- production differs materially from staging;
-- legal or privacy requirements are unresolved;
-- the agent cannot verify the live site;
-- a critical journey is blocked.
+- rollback is unavailable;
+- a critical conversion fails;
+- production materially differs from the reviewed candidate;
+- legal or privacy behavior is unresolved;
+- required live browser verification cannot be performed;
+- a launch-critical capability remains unknown.
 
 ---
 
-# 16. Complete beginner walkthrough
+# 16. Complete worked example
 
-This example shows how a beginner might use the system for a small service-business website.
+This example uses a five-page consultancy website whose goal is qualified project applications.
 
-## Project
-
-A consultancy wants a five-page website:
+## Planned pages
 
 ```text
 Home
-Services
-About
+Primary Service
 Case Studies
-Contact
+About
+Apply
 ```
 
-The business wants more qualified project applications.
-
-## Step 1: Install the skills
+## Step 1: Scaffold
 
 ```bash
-npx skills@latest add sathyvelukunashegaran/agentic-etch-production
+cd ~/Code/agentic-etch-production
+node scripts/scaffold-project.mjs ~/Sites/northstar-consulting
+cd ~/Sites/northstar-consulting
 ```
 
-## Step 2: Scaffold project memory
+Commit the scaffold.
 
-The scaffold script comes from a local checkout of the Agentic Etch Production repository. Run it from that checkout:
-
-```bash
-cd /path/to/agentic-etch-production
-node scripts/scaffold-project.mjs ~/Sites/consultancy-site
-```
-
-Alternatively, run the script by its absolute path while remaining in another directory:
-
-```bash
-node /path/to/agentic-etch-production/scripts/scaffold-project.mjs ~/Sites/consultancy-site
-```
-
-## Step 3: Open the project in the agent
-
-```bash
-cd ~/Sites/consultancy-site
-```
-
-Start your preferred agent from this directory.
-
-## Step 4: Run setup
+## Step 2: Setup
 
 ```text
 /setup-etch-production
 ```
 
-Ask the agent to inspect everything it can before asking questions.
+Example results for a suitably configured project:
 
-Example result for a suitably configured project:
+- WordPress verified;
+- Etch page inspection, text editing, class application, and preview verified;
+- Etch dynamic query creation remains unknown;
+- ACSS installation and token source verified;
+- browser screenshots, DOM, console, and network inspection verified;
+- staging URL recorded;
+- deployment recorded as a hosting workflow;
+- rollback recorded as a hosting snapshot.
 
-- WordPress verified
-- Etch verified for page inspection and editing
-- ACSS verified with token source
-- browser preview verified
-- staging URL recorded
-- deployment recorded as manual
-- rollback recorded as hosting snapshot
+Do not copy these statuses. Keep your actual unknown or unavailable statuses.
 
-Your project may produce different results. Keep any capability as `unknown` or `unavailable` when setup cannot verify it; do not copy the example statuses into the project.
-
-## Step 5: Clarify the site
+## Step 3: Grill
 
 ```text
 /grill-website
 ```
 
-The agent asks questions such as:
+The agent asks:
 
 ```text
 Which single buying situation should the homepage prioritize?
@@ -1220,547 +1384,594 @@ Which single buying situation should the homepage prioritize?
 You answer:
 
 ```text
-An owner-led consulting business has a credible service but its current website makes the offer look generic, and the owner wants a repositioned website before a planned launch.
+An owner-led consultancy has a credible service, but its existing website makes it look generic. The owner wants a stronger position and a qualified application path before a planned relaunch.
 ```
 
-The workflow continues one decision at a time.
+The conversation eventually produces:
 
-## Step 6: Approve the contract
+- approved terminology in `CONTEXT.md`;
+- approved audience, offer, voice, conversion intent, references, and anti-references in `PRODUCT.md`;
+- evidence gaps and approved claims in the evidence register.
 
-After reviewing `SITE-CONTRACT.md`, say:
+## Step 4: Specify
 
 ```text
-I approve this contract. Record the approval. Use the homepage-to-project-application journey as the tracer.
+/specify-website
 ```
 
-## Step 7: Deliver the tracer
+The agent builds conversion paths and page contracts.
+
+The main path becomes:
 
 ```text
-/deliver-etch-site
+recognize fit
+→ understand the primary service
+→ evaluate proof
+→ assess project fit
+→ start application
+→ receive confirmation
 ```
 
-The agent writes tracer acceptance criteria and then builds:
+You approve `SITE-CONTRACT.md`.
+
+## Step 5: Shape
+
+```text
+/shape-website
+```
+
+The agent presents three materially different directions:
+
+1. **Editorial authority** — large project imagery, asymmetric evidence compositions, committed deep-red field, serif display type.
+2. **Technical clarity** — neutral product-led system, compact diagrams, structured comparison, restrained blue accent.
+3. **Human workshop** — tactile photography, hand-marked process devices, warmer but non-generic color system, conversational hierarchy.
+
+You approve direction 1 but delegate final body-type selection within the agreed character.
+
+The agent records that decision and rejected alternatives in `DESIGN.md`.
+
+## Step 6: Plan
+
+```text
+/plan-website-delivery
+```
+
+The tracer becomes:
 
 ```text
 Homepage
--> service proof
--> project-fit section
--> contact form
--> confirmation state
+→ primary service proof
+→ project-fit section
+→ application form
+→ success state
 ```
 
-## Step 8: Review browser evidence
-
-The agent checks:
+Tickets:
 
 ```text
-360px
-768px
-1024px
-1440px
-keyboard flow
-form errors
-console
-network
+WEB-001 Global shell and homepage application tracer
+WEB-002 Extract proven component grammar
+WEB-003 Primary service enquiry journey
+WEB-004 Case-study discovery and detail journey
+WEB-005 About-page trust journey and remaining global content
+WEB-006 Whole-site hardening
 ```
 
-The tracer remains open until the criteria pass.
+## Step 7: Implement tracer
 
-## Step 9: Extract component grammar
-
-The agent records proven components such as:
-
-- site header
-- section heading
-- proof card
-- testimonial block
-- CTA band
-- application form
-
-## Step 10: Create delivery tickets
-
-The remaining work becomes:
+Start a new session:
 
 ```text
-Ticket 1: Deliver Services page and enquiry transition
-Ticket 2: Deliver Case Studies listing and detail experience
-Ticket 3: Deliver About page trust journey
-Ticket 4: Complete global navigation and footer
-Ticket 5: Whole-site hardening
+/implement-website-ticket WEB-001
 ```
 
-## Step 11: Complete each ticket in a fresh session
+The agent:
 
-At the start of each session, ask:
+- reads all artifacts;
+- confirms the ticket is unblocked;
+- writes or reconciles final copy;
+- implements semantic structure in Etch;
+- applies verified ACSS tokens;
+- renders after each meaningful section;
+- checks mobile, tablet, desktop, and wide targets;
+- tests form states;
+- runs the deterministic audit;
+- inspects screenshots, keyboard flow, console, and network;
+- records unresolved findings;
+- updates delivery state.
+
+## Step 8: Extract the system
+
+After the tracer passes, implement `WEB-002` in a fresh session.
+
+The component grammar may promote:
+
+- global header;
+- section heading composition;
+- evidence block;
+- testimonial figure;
+- CTA band;
+- application form.
+
+It should not create a universal “content card” merely because several sections contain headings and paragraphs.
+
+## Step 9: Complete remaining tickets
+
+Run each ticket in a fresh context. Update the frontier after every completion.
+
+## Step 10: Independent review
 
 ```text
-Read the project artifacts, summarize the current frontier, and implement only the named ticket. Do not change approved strategy without recording a contract change. Finish with rendered review and update DELIVERY-STATE.md.
+/review-website
 ```
 
-## Step 12: Harden and ship
+Resolve or explicitly accept findings.
 
-After all tickets pass:
+## Step 11: Ship
 
 ```text
 /ship-etch-site
 ```
 
-The agent verifies the live production environment and records the release.
+Verify the live application flow, analytics, forms, redirects, metadata, accessibility, and rollback ownership.
 
 ---
 
-# 17. How to resume work in a new session
+# 17. Resume in a fresh session
 
-Starting fresh is expected, not a failure.
+Fresh sessions are expected. They reduce context decay.
 
-Use this prompt:
-
-```text
-This is an existing Agentic Etch Production project. Read CONTEXT.md, SITE-CONTRACT.md, DELIVERY-STATE.md, docs/agents/stack.md, docs/site/evidence.md, and docs/site/component-grammar.md. Summarize the approved contract, current frontier, blockers, and verification status. Do not implement anything until you tell me which workflow or ticket should run next.
-```
-
-The agent should not require the entire old conversation.
-
-## Before ending a session
-
-Ask the agent:
+Start with:
 
 ```text
-Update DELIVERY-STATE.md with what was completed, what remains open, links to relevant tickets or commits, verification status, and a concise handoff for a fresh agent session.
+This is an existing Agentic Etch Production v0.2 project. Read CONTEXT.md, PRODUCT.md, SITE-CONTRACT.md, DESIGN.md, DELIVERY-STATE.md, docs/agents/stack.md, docs/site/evidence.md, docs/site/component-grammar.md, and docs/site/delivery-plan.md. Summarize approved product, site, and design decisions; current frontier; blockers; accepted deviations; and verification status. Do not implement until you identify the correct workflow or ticket.
 ```
 
-A good handoff contains:
+Before ending a session:
 
-- current movement;
-- exact completed scope;
-- unresolved findings;
-- current branch or commit;
-- next ticket;
-- files that changed;
-- browser evidence collected;
-- decisions requiring human approval.
+```text
+Update DELIVERY-STATE.md with the exact completed scope, current stage, current frontier, blockers, ticket and commit links, browser evidence, accepted deviations, decisions requiring approval, and a concise handoff for a fresh agent.
+```
+
+A good handoff includes:
+
+- exact ticket and branch;
+- completed criteria;
+- unresolved criteria;
+- files and components changed;
+- browser widths and states checked;
+- console or network findings;
+- decisions made;
+- decisions still requiring approval;
+- next safe action.
 
 ---
 
-# 18. How to work with tickets and multiple agents
+# 18. Use multiple agents safely
 
-This system supports multiple agents when work is divided by complete outcomes.
+Parallelism is useful only when dependencies and shared seams are stable.
 
-## Good parallel work
+## Safe parallel example
 
-Two tickets can run in parallel when they do not modify the same component contract or depend on unresolved shared decisions.
+```text
+Agent A: Case-study listing and detail journey
+Agent B: Application-form success and failure states
+```
+
+This may be safe when both use stable global components and do not modify the same contract.
+
+## Unsafe parallel example
+
+```text
+Agent A: Redesign global typography and spacing
+Agent B: Build all remaining pages using the current typography and spacing
+```
+
+Agent B depends on an unstable shared decision.
+
+## Before parallel work
+
+Record:
+
+- ticket dependencies;
+- shared files and components;
+- contract sections each agent may change;
+- expected merge order;
+- collision risks;
+- integration owner.
+
+Do not allow two agents to silently make conflicting changes to `DESIGN.md`, global ACSS configuration, or a shared component contract.
+
+---
+
+# 19. Use the specialist disciplines
+
+## `website-strategy`
 
 Example:
 
 ```text
-Agent A: Case-study listing and detail journey
-Agent B: Contact form and confirmation journey
-```
-
-This may be safe if both depend on stable global components.
-
-## Unsafe parallel work
-
-```text
-Agent A: Redesign global typography
-Agent B: Finish every page using current typography
-```
-
-The second task depends on an unstable shared decision.
-
-## Record blocking edges
-
-In `DELIVERY-STATE.md`, write:
-
-```markdown
-## Ticket links
-
-- WEB-12: Global navigation and shell
-- WEB-13: Homepage tracer, blocked by WEB-12
-- WEB-14: Service enquiry journey, blocked by WEB-13 component extraction
-- WEB-15: Case-study journey, may start after WEB-12
-```
-
-## Fresh-agent ticket prompt
-
-```text
-Implement ticket WEB-14 only. Read all project artifacts first. Confirm its dependencies are complete. Load the required domain and stack disciplines explicitly. Use the ticket's acceptance criteria as the completion boundary. Finish with rendered review and update DELIVERY-STATE.md.
-```
-
----
-
-# 19. How the individual disciplines work
-
-## `website-strategy`
-
-Use when deciding:
-
-- audience;
-- triggering situation;
-- offer;
-- page purpose;
-- sitemap;
-- user journey;
-- conversion path.
-
-Example request:
-
-```text
-Review this proposed sitemap using website-strategy. Explain which pages have a clear job and which pages exist only because competitors have them.
+Review this sitemap with website-strategy. Explain which pages serve named user situations and conversion paths, and which pages exist only because competitors have them.
 ```
 
 ## `proof-chain`
 
-Use when working with:
-
-- statistics;
-- testimonials;
-- outcome claims;
-- rankings;
-- certifications;
-- comparisons;
-- guarantees;
-- customer counts.
-
-Example request:
-
 ```text
-Use proof-chain to audit every claim on this homepage. Update the evidence register and block anything that cannot be published safely.
+Audit every substantive homepage claim. Update the evidence register, identify unsupported strength, and propose evidence-safe wording or a proof request.
 ```
 
 ## `website-copy`
 
-Use after page strategy is approved.
-
-Example request:
-
 ```text
-Write the primary service page from its approved page contract and evidence register. Use final copy, not a list of alternatives. Mark any unresolved proof request clearly.
+Write final copy for the approved primary-service page contract. Use the evidence register. Separate unresolved content requests from production copy and do not provide a list of interchangeable alternatives.
 ```
 
 ## `web-design`
 
-Use for:
-
-- hierarchy;
-- composition;
-- typography roles;
-- color roles;
-- image direction;
-- responsive priority;
-- interaction intent.
-
-Example request:
+Shape mode:
 
 ```text
-Define two materially different visual directions for this approved page contract. Explain how each direction supports the audience and offer. Do not implement either direction yet.
+Use web-design shape mode to propose materially different visual directions for the approved page contract. Preserve product context and keep approval gates separate.
+```
+
+Craft mode:
+
+```text
+Use web-design craft mode to implement the approved direction. Preserve signature composition, states, responsive priorities, and visual anti-pattern boundaries.
+```
+
+Critique mode:
+
+```text
+Critique the rendered page against PRODUCT.md, SITE-CONTRACT.md, and DESIGN.md. Report observed evidence and material corrections, not generic design advice.
 ```
 
 ## `component-grammar`
 
-Use after real patterns appear.
-
-Example request:
-
 ```text
-Review the completed tracer and identify which patterns deserve reusable components, which should remain page compositions, and which are accidental similarities.
+Review the completed tracer. Identify patterns with stable responsibilities and content seams that deserve promotion, page compositions that should remain local, and speculative abstractions that should be removed.
 ```
 
 ## `etch`
 
-Use only with verified project capability.
-
-Example request:
-
 ```text
-Use the verified Etch capabilities recorded in docs/agents/stack.md to implement this approved page section. Do not assume unsupported operations. Record any newly verified limitation.
+Implement this approved section using only Etch operations verified in docs/agents/stack.md. Record any newly verified capability or limitation and do not claim completion without rendered evidence.
 ```
 
 ## `acss`
 
-Use for system styling.
-
-Example request:
-
 ```text
-Style this component using only verified project ACSS tokens where possible. Document any required custom CSS beyond the token boundary.
+Style this component using the project's verified ACSS tokens and configuration. Document any scoped custom CSS beyond the token boundary and do not invent variable names.
 ```
 
 ## `rendered-review`
 
-Use after implementation and before launch.
-
-Example request:
-
 ```text
-Run rendered-review on the homepage-to-application journey. Keep the six review axes separate and provide browser evidence for every pass or failure.
+Run continuous rendered review on this vertical slice. Execute deterministic checks, inspect the rendered page at required widths and states, and compare it with the relevant product, site, design, and ticket contracts.
 ```
 
 ---
 
-# 20. Common problems and fixes
+# 20. Validate project readiness
 
-## Problem: The agent starts building immediately
+The project validator checks artifact presence and stage gates.
 
-Cause:
-
-- no approved site contract;
-- workflow was skipped;
-- user prompt asked for implementation before understanding.
-
-Fix:
-
-```text
-Stop implementation. Run /grill-website and produce an approved SITE-CONTRACT.md before continuing.
+```bash
+node scripts/validate-project.mjs /path/to/project --stage=setup
+node scripts/validate-project.mjs /path/to/project --stage=product
+node scripts/validate-project.mjs /path/to/project --stage=specification
+node scripts/validate-project.mjs /path/to/project --stage=design
+node scripts/validate-project.mjs /path/to/project --stage=planning
+node scripts/validate-project.mjs /path/to/project --stage=implementation
+node scripts/validate-project.mjs /path/to/project --stage=review
+node scripts/validate-project.mjs /path/to/project --stage=ship
 ```
 
-## Problem: The agent asks too many factual questions
+Examples:
 
-Cause:
+- `product` requires approved `PRODUCT.md`;
+- `specification` also requires approved `SITE-CONTRACT.md`;
+- `design` also requires approved `DESIGN.md`;
+- `planning` also requires an approved delivery plan, a nonempty tracer, and at least one real ticket row;
+- later stages warn about missing current tickets, unverified scope, or unresolved stack capability.
 
-- it is asking you for information available in the repository or environment.
+Validation is a guardrail, not a substitute for human approval or browser review.
 
-Fix:
+Repository maintainers run:
 
-```text
-Inspect the repository, existing website, and connected tools for factual answers. Ask me only about business or approval decisions that cannot be discovered.
+```bash
+npm run validate
 ```
 
-## Problem: The agent invents an ACSS token
-
-Cause:
-
-- token source was not verified;
-- the agent guessed a familiar variable pattern.
-
-Fix:
-
-```text
-Remove the invented token. Verify the project's actual ACSS version and token source. Use a documented token or record a scoped custom CSS exception.
-```
-
-## Problem: The agent claims Etch work is complete without changing Etch
-
-Cause:
-
-- Etch capability was assumed;
-- source-level planning was confused with implementation.
-
-Fix:
-
-```text
-Mark this work unimplemented. Verify which Etch operations are available in the current project and perform the change through those verified operations.
-```
-
-## Problem: The design looks generic
-
-Cause:
-
-- the visual register was not defined;
-- content hierarchy was weak;
-- every section used the same card treatment;
-- design was implemented before strategy was resolved.
-
-Fix:
-
-```text
-Use web-design to review the page's visual register, hierarchy, composition, and responsive priority against the approved contract. Create materially different prototypes before revising production.
-```
-
-## Problem: The agent builds too many components
-
-Cause:
-
-- abstraction occurred before a tracer existed;
-- visual similarity was mistaken for reusable responsibility.
-
-Fix:
-
-```text
-Return to component-grammar. Keep only components with a stable responsibility and content seam proven by rendered use. Demote speculative components to page composition.
-```
-
-## Problem: The agent forgets earlier decisions
-
-Cause:
-
-- decisions existed only in conversation;
-- project artifacts were not updated;
-- the session became too long.
-
-Fix:
-
-```text
-Stop. Reconcile the conversation with the project artifacts, update DELIVERY-STATE.md, and continue in a fresh session using the files as the source of truth.
-```
-
-## Problem: A page passes desktop but fails mobile
-
-Cause:
-
-- responsive work was treated as a final cleanup stage;
-- content priority was not designed.
-
-Fix:
-
-```text
-Reopen the ticket. Run rendered-review at all required widths, verify reading order and proof adjacency, and correct the component rather than adding page-specific patches where possible.
-```
-
-## Problem: The agent says review passed without screenshots or browser access
-
-Cause:
-
-- source inspection was incorrectly treated as rendered evidence.
-
-Fix:
-
-```text
-Change the review status to unverified. List the exact pages, widths, and interactions that still require browser evidence.
-```
-
-## Problem: The workflow feels too heavy for a tiny site
-
-Cause:
-
-- every possible artifact or phase is being expanded unnecessarily.
-
-Fix:
-
-Use one concise site contract, one tracer, and a few tickets. Research and prototypes are conditional, not mandatory.
-
-## Problem: The workflow feels too light for a large site
-
-Cause:
-
-- the contract or ticket graph is too coarse.
-
-Fix:
-
-Split page contracts, create a decision map, identify dependencies, and use fresh sessions for each vertical slice.
+That checks versions, manifests, skill metadata, invocation policy, router coverage, templates, scripts, TODO leakage, and local Markdown links.
 
 ---
 
-# 21. Recommended first pilot project
+# 21. Common problems and corrections
 
-Do not begin with the most complicated client site.
+## The agent begins implementation immediately
 
-Choose a real but controlled project containing:
+Cause:
 
-- one primary conversion;
-- one landing page or homepage;
-- real copy;
-- real proof;
-- header and footer;
-- one form;
-- at least one reusable component;
-- responsive requirements;
-- one dynamic WordPress element if possible.
+- product, site, or design approval was skipped.
 
-Avoid for the first pilot:
-
-- large ecommerce;
-- complex memberships;
-- multilingual sites;
-- highly regulated claims;
-- dozens of custom post types;
-- direct production-only access.
-
-## Good first-pilot target
+Correction:
 
 ```text
-Homepage
--> primary offer
--> proof
--> project-fit criteria
--> enquiry form
--> confirmation state
+Stop implementation. Use /ask-etch-production to identify the missing approval boundary. Do not continue until the authoritative artifact is approved.
 ```
 
-The first pilot is successful when a fresh agent can continue the work using only the repository and project artifacts.
+## The agent asks factual questions that the environment can answer
+
+Correction:
+
+```text
+Inspect the repository, current website, connected tools, and verified documentation before asking me. Ask me only for business choices, approval decisions, or unavailable access.
+```
+
+## Strategy and visual design are mixed together
+
+Correction:
+
+```text
+Move audience, offer, voice, and register decisions to PRODUCT.md. Keep page jobs and acceptance criteria in SITE-CONTRACT.md. Keep visual solutions and direction in DESIGN.md.
+```
+
+## Shape confirmation is treated as permission to build
+
+Correction:
+
+```text
+Shape confirmation advances to direction questions and visual evidence. It is not implementation approval. Complete all four visual gates.
+```
+
+## The visual directions are merely palette swaps
+
+Correction:
+
+```text
+Produce directions that differ materially in composition, hierarchy, density, imagery, atmosphere, and signature moves. Do not count color variations as separate directions.
+```
+
+## The implemented design looks generic
+
+Correction:
+
+```text
+Compare the browser output with DESIGN.md. Identify which approved composition, imagery, typography character, color commitment, signature motifs, or density were lost. Correct those material defects before adding decoration.
+```
+
+## The agent invents an ACSS token
+
+Correction:
+
+```text
+Remove the invented token. Verify the installed ACSS version and token source. Use a real token or record a scoped custom property beyond the token boundary.
+```
+
+## The agent claims Etch work is complete without changing Etch
+
+Correction:
+
+```text
+Mark the work unimplemented. Verify the required Etch operation and perform it through the actual project control surface. Record the capability status in docs/agents/stack.md.
+```
+
+## The component library grows before the tracer works
+
+Correction:
+
+```text
+Keep only minimum provisional boundaries required by the tracer. Promote durable components only after rendered repetition proves responsibility, variants, states, and content seams.
+```
+
+## The agent uses one enormous conversation for the entire website
+
+Correction:
+
+```text
+Update durable artifacts and DELIVERY-STATE.md. Continue each substantial ticket in a fresh context using the artifacts as the source of truth.
+```
+
+## Desktop passes but mobile fails
+
+Correction:
+
+```text
+Reopen the ticket. Review responsive content priority, reading order, proof adjacency, interactions, and overflow at required and stress widths. Correct the system or component rather than adding unexplained page patches.
+```
+
+## The deterministic audit reports zero findings, so the agent declares success
+
+Correction:
+
+```text
+Detectors provide evidence, not proof. Continue screenshot inspection, keyboard testing, realistic states, console, network, performance, and qualitative contract review.
+```
+
+## There is no browser access
+
+Correction:
+
+```text
+Mark the result implemented but unverified. List the exact pages, widths, states, journeys, keyboard checks, console checks, network checks, and performance checks still required.
+```
+
+## The workflow feels too heavy for a tiny site
+
+Use:
+
+- one concise `PRODUCT.md`;
+- one site contract;
+- one focused design direction;
+- one tracer;
+- a few vertical tickets.
+
+Research and prototypes are conditional, not mandatory.
+
+## The workflow feels too light for a large site
+
+Add:
+
+- separate page-type contracts;
+- a decision map;
+- explicit shared seams;
+- dependency edges;
+- multiple tracer experiences when distinct systems require them;
+- fresh contexts and independent reviews per workstream.
 
 ---
 
-# 22. Project checklists
+# 22. Operational checklists
 
-## Installation checklist
+## Installation
 
 - [ ] Skills installed
-- [ ] Five workflows visible
+- [ ] Workflows visible
+- [ ] Disciplines visible
 - [ ] Website project opened in the correct directory
-- [ ] Project memory scaffolded
-- [ ] Initial scaffold committed
+- [ ] Project artifacts scaffolded or migrated
+- [ ] Initial artifact state committed
 
-## Setup checklist
+## Setup
 
-- [ ] WordPress status verified
-- [ ] Etch status verified
-- [ ] Etch operations recorded
-- [ ] ACSS status verified
-- [ ] ACSS token source recorded
+- [ ] WordPress status recorded
+- [ ] Etch version or evidence recorded
+- [ ] Required Etch operations classified
+- [ ] ACSS version or evidence recorded
+- [ ] Token source recorded
 - [ ] Browser tools recorded
-- [ ] Staging URL recorded
-- [ ] Production URL recorded
-- [ ] Deployment method recorded
-- [ ] Rollback method recorded
+- [ ] Visual-exploration tools recorded
+- [ ] Staging and production recorded
+- [ ] Deployment recorded
+- [ ] Backup recorded
+- [ ] Rollback recorded
+- [ ] Tracker recorded
 - [ ] Approval authority recorded
 
-## Strategy checklist
+## Product
 
+- [ ] Domain vocabulary established
 - [ ] Business outcome defined
-- [ ] Primary audience defined
-- [ ] Triggering situation defined
+- [ ] Primary users defined
+- [ ] Triggering situations defined
 - [ ] Offer defined
 - [ ] Differentiation defined
-- [ ] Primary conversion defined
-- [ ] Sitemap justified
+- [ ] Conversion intent defined
+- [ ] Voice defined
+- [ ] Proof gaps recorded
+- [ ] Design register selected
+- [ ] Physical-use context recorded
+- [ ] References explained
+- [ ] Anti-references explained
+- [ ] Scope boundaries recorded
+- [ ] `PRODUCT.md` approved
+
+## Specification
+
+- [ ] Conversion paths defined
+- [ ] Information architecture justified
 - [ ] Page jobs defined
 - [ ] Message hierarchy defined
-- [ ] Proof gaps recorded
-- [ ] Visual register defined
-- [ ] Scope boundaries defined
-- [ ] Site contract approved
+- [ ] Proof obligations mapped
+- [ ] Dynamic content and states defined
+- [ ] Functional integrations defined
+- [ ] Responsive obligations defined
+- [ ] Accessibility obligations defined
+- [ ] SEO and performance obligations defined
+- [ ] Acceptance criteria observable
+- [ ] `SITE-CONTRACT.md` approved
 
-## Tracer checklist
+## Design
 
+- [ ] Shape brief confirmed
+- [ ] Direction questions resolved
+- [ ] Existing system inspected
+- [ ] Materially different directions produced
+- [ ] Visual evidence reviewed
+- [ ] Selected direction recorded
+- [ ] Rejected directions recorded
+- [ ] Signature motifs recorded
+- [ ] Responsive priorities recorded
+- [ ] State coverage recorded
+- [ ] Anti-patterns recorded
+- [ ] `DESIGN.md` approved
+
+## Planning
+
+- [ ] Highest-risk assumptions identified
 - [ ] Tracer selected
-- [ ] Acceptance criteria written
-- [ ] Copy approved
-- [ ] Proof references approved
-- [ ] Design intent recorded
-- [ ] Etch capability confirmed
-- [ ] ACSS capability confirmed
-- [ ] Implementation complete
-- [ ] Required widths reviewed
-- [ ] Keyboard journey reviewed
-- [ ] Form or interaction states reviewed
-- [ ] Console reviewed
-- [ ] Network behavior reviewed
-- [ ] Findings resolved or accepted
-
-## Expansion checklist
-
-- [ ] Component grammar extracted
-- [ ] Remaining work ticketed vertically
+- [ ] Tracer acceptance criteria approved
+- [ ] Vertical tickets created
 - [ ] Dependencies recorded
+- [ ] Shared seams recorded
+- [ ] Collision risks recorded
+- [ ] Fresh-context boundaries recorded
 - [ ] Current frontier recorded
-- [ ] Each substantial ticket uses a fresh context
-- [ ] Each ticket ends with rendered review
+- [ ] Delivery plan approved
 
-## Launch checklist
+## Ticket implementation
 
-- [ ] Hardening complete
+- [ ] Ticket is on current frontier
+- [ ] Dependencies complete
+- [ ] Required capabilities verified
+- [ ] Outcome and criteria restated
+- [ ] Required disciplines loaded
+- [ ] Real copy and proof used
+- [ ] Approved direction preserved
+- [ ] ACSS tokens verified
+- [ ] Custom CSS exceptions documented
+- [ ] Etch operations verified
+- [ ] Realistic states covered
+- [ ] Required widths rendered
+- [ ] Deterministic audit run
+- [ ] Screenshots inspected
+- [ ] Keyboard path checked
+- [ ] Console checked
+- [ ] Network checked
+- [ ] Independent ticket review completed
+- [ ] Delivery state and handoff updated
+
+## Whole-site review
+
+- [ ] Fixed revision named
+- [ ] Required pages listed
+- [ ] Required journeys listed
+- [ ] Required widths listed
+- [ ] Required states listed
+- [ ] Product and conversion reviewed
+- [ ] Copy and proof reviewed
+- [ ] Visual direction and craft reviewed
+- [ ] Components and ACSS reviewed
+- [ ] Responsive states and accessibility reviewed
+- [ ] Stack and performance reviewed
+- [ ] Contract fidelity reviewed
+- [ ] Findings resolved, accepted, blocked, or deferred with owners
+- [ ] Corrected findings re-verified
+- [ ] Shipping recommendation recorded
+
+## Launch
+
+- [ ] Reviewed candidate fixed
+- [ ] Release scope recorded
 - [ ] Backup confirmed
 - [ ] Rollback confirmed
-- [ ] Release scope recorded
-- [ ] Production deployment completed
-- [ ] Live primary journey verified
-- [ ] Forms verified
-- [ ] Redirects verified
-- [ ] SEO metadata verified
-- [ ] Analytics verified
-- [ ] Privacy and consent verified
-- [ ] Production errors checked
+- [ ] Production access confirmed
+- [ ] Release owner confirmed
+- [ ] Form owner confirmed
+- [ ] Analytics owner confirmed
+- [ ] Privacy and consent confirmed
+- [ ] Observability confirmed
+- [ ] Production deployed through verified mechanism
+- [ ] Live navigation checked
+- [ ] Live conversion checked
+- [ ] Live forms checked
+- [ ] Live dynamic data checked
+- [ ] Live redirects checked
+- [ ] Live metadata checked
+- [ ] Live analytics checked
+- [ ] Live responsive and accessibility checks completed
+- [ ] Live console and network checked
 - [ ] Release recorded in `DELIVERY-STATE.md`
 
 ---
@@ -1769,145 +1980,167 @@ The first pilot is successful when a fresh agent can continue the work using onl
 
 ## Acceptance criteria
 
-Observable conditions that must be true before work is considered complete.
+Observable conditions that must be true before work is complete.
+
+## Blocking edge
+
+A dependency showing that one ticket cannot safely start until another result exists.
 
 ## Component grammar
 
-The rules governing which reusable interface components exist, what they are responsible for, and how they combine.
+The reusable components, responsibilities, variants, content seams, states, and composition rules that form the interface language.
 
 ## Content seam
 
-The boundary within a component where content may vary without requiring the component structure to change.
+The boundary inside a component where content may vary without requiring a structural redesign.
 
 ## Conversion path
 
-The complete journey from a visitor's intent to a meaningful action.
+The complete journey from a user's triggering situation to a meaningful action.
 
-## Discipline
+## Design register
 
-A reusable specialist skill that provides focused judgment inside one or more workflows.
+The broad mode the design serves:
+
+- **brand** — identity and emotional resonance lead;
+- **product** — repeated tasks, clarity, and state design lead;
+- **hybrid** — marketing and task-led surfaces share a system but use different composition and density rules.
 
 ## Durable artifact
 
-A project file that preserves decisions or state across agent sessions.
-
-## Evidence register
-
-A table connecting public claims to evidence, sources, confidence, permissible wording, and publication status.
+A project file that preserves approved decisions or execution state across agent sessions.
 
 ## Fresh context
 
-A new agent session that starts from durable artifacts rather than depending on a very long previous conversation.
+A new agent session that begins from durable project artifacts instead of depending on a long prior conversation.
 
 ## Page contract
 
-The durable agreement describing who a page serves, what job it performs, how it converts, what it says, what proof it needs, and how completion is verified.
+The durable agreement describing a page's user, job, conversion, content, proof, behavior, and acceptance criteria.
+
+## Physical-use context
+
+A concrete description of who uses the surface, where, under what ambient conditions, with what urgency, and in what mood.
 
 ## Proof chain
 
-The connection:
-
 ```text
-claim -> evidence -> source -> permissible wording
+claim → evidence → source → permissible wording
 ```
 
 ## Rendered truth
 
-The principle that actual browser behavior is the authoritative result, not the agent's intention or source-code description.
+The principle that actual browser output and behavior outrank source-code intention, builder state, or an agent's description.
+
+## Signature motif
+
+A distinctive recurring visual move connected to the approved direction, such as a specific composition, transition device, imagery treatment, or evidence pattern.
 
 ## Token boundary
 
-The boundary between system-level styling controlled by ACSS and component-specific styling that may require scoped custom CSS.
+The boundary between system-level styling owned by ACSS and component-specific styling that may justify scoped custom CSS.
 
 ## Tracer experience
 
-The smallest complete user experience that tests strategy, content, implementation, responsive behavior, and verification together.
+The smallest complete user experience that tests strategy, content, visual direction, implementation, states, responsive behavior, and verification together.
 
 ## Vertical ticket
 
-A ticket that delivers a complete user-observable outcome rather than only one technical layer.
+A ticket delivering a complete user-observable outcome instead of one horizontal technical layer.
 
-## Visual register
+## Visual evidence
 
-The coherent level of formality, energy, density, contrast, imagery, and motion appropriate to the audience and offer.
+A concrete representation used to approve direction before implementation, such as generated mocks, browser prototypes, or structured page compositions.
 
-## Workflow
+## Current frontier
 
-A human-invoked sequence that manages a consequential project transition.
+The approved, unblocked tickets that are safe to begin now.
 
 ---
 
 # 24. Frequently asked questions
 
-## Do I have to run every workflow for every site?
+## Do I need Etch automation to use the system?
 
-No. Setup should run once per project. The website should be grilled when strategy is unclear. Delivery may cover multiple movements depending on current state. Shipping runs only at launch.
+No. Strategy, proof, copy, visual shaping, component reasoning, and review can still be useful. Etch implementation remains manual or unverified until a real control path is available.
 
-## Must the homepage always be the tracer?
+## Must the homepage be the tracer?
 
-No. Choose the smallest complete journey that provides the most useful architectural learning.
+No. Choose the smallest complete journey with the highest architectural learning value.
 
-## Can I use this without Etch automation?
+## Do I have to create three visual directions every time?
 
-You can use the strategy, proof, copy, design, component, and review disciplines. Etch implementation must remain manual or unverified until a real control path exists.
+No fixed number is required. You need enough materially different evidence to make the decision real. A constrained existing system may need fewer alternatives; an ambiguous greenfield brand may need more.
 
 ## Can the agent use custom CSS?
 
-Yes, but only beyond the documented ACSS token boundary. Custom CSS should be scoped, justified, and recorded in the component grammar.
+Yes. Use verified ACSS system values first. Add the smallest scoped custom styling needed for a component requirement that ACSS does not own, and document the exception.
 
-## Can I change the approved contract?
+## Can contracts change after approval?
 
-Yes. Record the change, explain its effect, and obtain explicit approval before scaling the new direction.
+Yes. Record the proposed change, explain downstream effects, obtain approval, and update dependent artifacts or tickets. Do not silently drift.
 
-## Should I put client documents in this repository?
+## Should every repeated pattern become a component?
 
-No. Put client-specific material in the client or website project. This repository should remain reusable.
+No. Promote a component when it has a stable responsibility, meaningful public interface, proven content seam, understood states, and real reuse leverage.
 
-## Should I add more skills immediately?
+## Should the same agent implement and review?
 
-No. Add a skill only when real usage shows that independent invocation, reuse, or context isolation justifies it.
+Continuous self-review is necessary during implementation. A final independent review from a fresh context is still preferable because it reduces confirmation bias and context pollution.
 
-## What should I do when I am unsure which command to run?
+## Can multiple tickets run in parallel?
 
-Run:
+Yes, when dependencies are complete and shared seams are stable. Record collision risks and ownership first.
 
-```text
-/ask-etch-production
-```
+## Is a zero-finding browser audit a pass?
+
+No. It means only that the detector did not find the conditions it knows how to detect. Qualitative and interaction review remains required.
 
 ## How do I know the system is working?
 
-The strongest signal is that a fresh agent can read the project artifacts, explain the approved website, identify the current frontier, and continue without relying on the original conversation.
+A fresh agent should be able to read the nine artifacts and accurately explain:
 
-## What is the best first use?
+- the approved product and audience;
+- page obligations;
+- visual direction;
+- admissible claims;
+- verified stack capabilities;
+- component rules;
+- delivery topology;
+- current frontier;
+- blockers and verification state.
 
-Run the workflow on one controlled real project and complete one tracer experience from strategy through browser verification.
+The strongest milestone is not merely that one page looks good. It is that another agent can continue and review the work without depending on the original conversation.
 
 ---
 
-# Minimal quick-start summary
+# Minimal quick-start
 
-For a new project, the shortest recommended path starts from a local checkout of Agentic Etch Production:
+From a checkout of Agentic Etch Production:
 
 ```bash
-cd /path/to/agentic-etch-production
 node scripts/scaffold-project.mjs /path/to/website-project
 ```
 
-You may also call `scripts/scaffold-project.mjs` by its absolute path from another directory.
-
-Then, inside the agent:
+Then inside the project:
 
 ```text
 /setup-etch-production
 /grill-website
-/deliver-etch-site
+/specify-website
+/shape-website
+/plan-website-delivery
+/implement-website-ticket WEB-001
+/review-website
 /ship-etch-site
 ```
 
-Remember the four most important rules:
+Remember:
 
-1. Do not build without an approved contract.
-2. Do not invent claims, Etch operations, or ACSS tokens.
-3. Prove one complete tracer experience before scaling.
-4. Do not declare completion without rendered browser evidence.
+1. Product truth before page specification.
+2. Page obligations before visual solutions.
+3. Visual approval before production implementation.
+4. One tracer before system expansion.
+5. One substantial ticket per fresh context.
+6. Verified Etch operations and ACSS tokens only.
+7. Browser evidence before completion or shipping.
