@@ -8,7 +8,7 @@ Current release: **0.2.0**.
 
 v0.2 combines:
 
-- Matt-style small, composable workflows and fresh-context tickets;
+- Small, composable workflows and fresh-context tickets;
 - a visual-design subsystem with explicit shaping gates, approved direction, craft rules, and continuous browser iteration;
 - professional website-production obligations for strategy, proof, copy, semantics, responsive quality, QA, and launch;
 - Etch and ACSS as verified implementation adapters rather than assumed capabilities.
